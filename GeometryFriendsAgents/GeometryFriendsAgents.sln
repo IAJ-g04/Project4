@@ -8,9 +8,9 @@ EndProject
 Project("{911E67C6-3D85-4FCE-B560-20A9C3E3FF48}") = "GeometryFriends", "GeometryFriendsFiles\GeometryFriends.exe", "{020E7B32-CD7C-4A4C-B972-4EEEBDAB146F}"
 	ProjectSection(DebuggerProjectSystem) = preProject
 		PortSupplier = 00000000-0000-0000-0000-000000000000
-		Executable = 
+		Executable = C:\Users\luis_\Documents\IAJ-Project4\GeometryFriendsAgents\GeometryFriendsFiles\x86\Debug\GeometryFriends.exe
 		RemoteMachine = 
-		StartingDirectory = C:\Users\Kaguedes\Documents\Kaguedes-sama\IAJ\GeometryFriendsAgents\GeometryFriendsFiles\x86\Debug
+		StartingDirectory = C:\Users\luis_\Documents\IAJ-Project4\GeometryFriendsAgents\GeometryFriendsFiles\x86\Debug
 		Arguments = 
 		Environment = Default
 		LaunchingEngine = 00000000-0000-0000-0000-000000000000
