@@ -8,6 +8,9 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using GeometryFriends.AI.Interfaces;
 
+using GeometryFriendsAgents.ProblemDectection;
+
+
 namespace GeometryFriendsAgents
 {
     class RectangleAgent : IRectangleAgent
@@ -29,10 +32,13 @@ namespace GeometryFriendsAgents
 
         private int nCollectiblesLeft;
 
-        private string agentName = "RandRect";
+        private string agentName = "LearningRect";
 
         //Area of the game screen
         protected Rectangle area;
+
+        //LEARNING AGENT
+        private ProblemDectectionAlgorithm PdA;
 
         public RectangleAgent() 
         {
@@ -43,6 +49,7 @@ namespace GeometryFriendsAgents
             lastAction = 0;
             currentAction = 0;
             rnd = new Random();
+
         }
 
         public void Setup(int[] nI, float[] sI, float[] cI, float[] oI, float[] sPI, float[] cPI, float[] colI, Rectangle area, double timeLimit) {
@@ -240,8 +247,12 @@ namespace GeometryFriendsAgents
 
                 temp++;
             }
+            
 
-            DebugSensorsInfo();
+
+
+
+            //DebugSensorsInfo();
         }
 
         private void SetImplementedAgent(bool b)
