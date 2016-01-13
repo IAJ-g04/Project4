@@ -30,6 +30,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="GeometryFriends, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
@@ -49,6 +52,7 @@
     <Compile Include="CircleAgent.cs" />
     <Compile Include="ConsolePrinter.cs" />
     <Compile Include="IAJ\ProblemDectection\ProblemDetectionAlgorithm.cs" />
+    <Compile Include="IAJ\WorldModel\RectangleCharacter.cs" />
     <Compile Include="IAJ\WorldModel\Collectible.cs" />
     <Compile Include="IAJ\WorldModel\Connection.cs" />
     <Compile Include="IAJ\WorldModel\LevelMatrix.cs" />

@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework;
 using GeometryFriends.AI.Interfaces;
 
 using GeometryFriendsAgents.ProblemDectection;
-
+using GeometryFriendsAgents.Model;
 
 namespace GeometryFriendsAgents
 {
@@ -38,6 +38,7 @@ namespace GeometryFriendsAgents
         protected Rectangle area;
 
         //LEARNING AGENT
+        protected WorldModel Model;
         private ProblemDectectionAlgorithm PdA;
 
         public RectangleAgent() 
@@ -247,12 +248,11 @@ namespace GeometryFriendsAgents
 
                 temp++;
             }
-            
 
 
+            this.Model = new WorldModel(nI,sI, cI, oI, sPI, cPI, colI, area);
 
-
-            //DebugSensorsInfo();
+            DebugSensorsInfo();
         }
 
         private void SetImplementedAgent(bool b)
@@ -352,6 +352,11 @@ namespace GeometryFriendsAgents
 
                 temp++;
             }
+            Console.WriteLine(sI[4]);
+            System.Diagnostics.Debug.WriteLine(sI[4]);
+            ConsolePrinter.Print(sI[4].ToString());
+
+            Console.ReadLine();
         }
 
         // this method is deprecated, please use SensorsUpdated instead

@@ -11,7 +11,7 @@ Project("{911E67C6-3D85-4FCE-B560-20A9C3E3FF48}") = "GeometryFriends", "Geometry
 		Executable = C:\Users\luis_\Documents\IAJ-Project4\GeometryFriendsAgents\GeometryFriendsFiles\x86\Debug\GeometryFriends.exe
 		RemoteMachine = 
 		StartingDirectory = C:\Users\luis_\Documents\IAJ-Project4\GeometryFriendsAgents\GeometryFriendsFiles\x86\Debug
-		Arguments = 
+		Arguments = -s 2 2
 		Environment = Default
 		LaunchingEngine = 00000000-0000-0000-0000-000000000000
 		UseLegacyDebugEngines = No
@@ -39,12 +39,12 @@ Global
 		{6F45AB29-7874-4B3D-8073-B2D5F0C1A35F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{6F45AB29-7874-4B3D-8073-B2D5F0C1A35F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{6F45AB29-7874-4B3D-8073-B2D5F0C1A35F}.Release|x86.ActiveCfg = Release|Any CPU
-		{020E7B32-CD7C-4A4C-B972-4EEEBDAB146F}.Debug|Any CPU.ActiveCfg = Release
-		{020E7B32-CD7C-4A4C-B972-4EEEBDAB146F}.Debug|Mixed Platforms.ActiveCfg = Release
-		{020E7B32-CD7C-4A4C-B972-4EEEBDAB146F}.Debug|x86.ActiveCfg = Release
-		{020E7B32-CD7C-4A4C-B972-4EEEBDAB146F}.Release|Any CPU.ActiveCfg = Release
-		{020E7B32-CD7C-4A4C-B972-4EEEBDAB146F}.Release|Mixed Platforms.ActiveCfg = Release
-		{020E7B32-CD7C-4A4C-B972-4EEEBDAB146F}.Release|x86.ActiveCfg = Release
+		{020E7B32-CD7C-4A4C-B972-4EEEBDAB146F}.Debug|Any CPU.ActiveCfg = Release|x86
+		{020E7B32-CD7C-4A4C-B972-4EEEBDAB146F}.Debug|Mixed Platforms.ActiveCfg = Release|x86
+		{020E7B32-CD7C-4A4C-B972-4EEEBDAB146F}.Debug|x86.ActiveCfg = Release|x86
+		{020E7B32-CD7C-4A4C-B972-4EEEBDAB146F}.Release|Any CPU.ActiveCfg = Release|x86
+		{020E7B32-CD7C-4A4C-B972-4EEEBDAB146F}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{020E7B32-CD7C-4A4C-B972-4EEEBDAB146F}.Release|x86.ActiveCfg = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
