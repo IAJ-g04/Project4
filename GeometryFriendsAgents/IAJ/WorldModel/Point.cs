@@ -27,5 +27,10 @@ namespace GeometryFriendsAgents.Model
         {
             throw new NotImplementedException();
         }
+
+        public float DistanceTo(Point otherPoint)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

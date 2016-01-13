@@ -51,6 +51,17 @@
   <ItemGroup>
     <Compile Include="CircleAgent.cs" />
     <Compile Include="ConsolePrinter.cs" />
+    <Compile Include="IAJ\Pathfinding\AStartPathfinding.cs" />
+    <Compile Include="IAJ\Pathfinding\DataStructures\IClosedSet.cs" />
+    <Compile Include="IAJ\Pathfinding\DataStructures\IOpenSet.cs" />
+    <Compile Include="IAJ\Pathfinding\DataStructures\NodePriorityHeap.cs" />
+    <Compile Include="IAJ\Pathfinding\DataStructures\NodeRecordArray.cs" />
+    <Compile Include="IAJ\Pathfinding\DataStructures\PrirorityQueue.cs" />
+    <Compile Include="IAJ\Pathfinding\Heuristics\EuclideanDistanceHeuristic.cs" />
+    <Compile Include="IAJ\Pathfinding\Heuristics\IHeuristic.cs" />
+    <Compile Include="IAJ\Pathfinding\Heuristics\ZeroHeuristic.cs" />
+    <Compile Include="IAJ\Pathfinding\NodeArrayAStarPathfinding.cs" />
+    <Compile Include="IAJ\Pathfinding\NodeRecord.cs" />
     <Compile Include="IAJ\ProblemDectection\ProblemDetectionAlgorithm.cs" />
     <Compile Include="IAJ\WorldModel\RectangleCharacter.cs" />
     <Compile Include="IAJ\WorldModel\Collectible.cs" />
@@ -63,14 +74,15 @@
     <Compile Include="IAJ\WorldModel\WorldObject.cs" />
     <Compile Include="Moves.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RectangleAgent.cs" />
+    <Compile Include="RectangleAgent.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AgentsDLL\" />
     <Folder Include="GeometryFriendsFiles\" />
     <Folder Include="IAJ\InstructionManual\" />
     <Folder Include="IAJ\LearningController\" />
-    <Folder Include="IAJ\PathfindingAlgorithm\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

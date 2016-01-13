@@ -20,11 +20,7 @@ namespace GeometryFriendsAgents.Model
         public bool LeftWall = false;
 
         public bool RightWall = false;
-
-        protected float _width;
-
-        protected float _height;
-
+        
         public float Left {
             get { return xPos - Width / 2; }
         }
@@ -44,10 +40,10 @@ namespace GeometryFriendsAgents.Model
         public int CompareTo(object obj) {
             Platform p = (Platform)obj;
 
-            float myTop = (float)yPos - _height / 2;
+            float myTop = (float)yPos - Height / 2;
             float hisTop = (float)p.yPos - p.Height / 2;
 
-            float myLeft = (float)xPos - _width / 2;
+            float myLeft = (float)xPos - Width / 2;
             float hisLeft = (float)p.xPos - p.Width / 2;
 
             if (myTop < hisTop)

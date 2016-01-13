@@ -16,8 +16,13 @@ namespace GeometryFriendsAgents.Model {
 
         public RectangleCharacter Character { get; private set; }
 
+        public List<Point> Mesh { get; private set; }
+
         public WorldModel(int[] nI, float[] sI, float[] cI, float[] oI, float[] sPI, float[] cPI, float[] colI, Rectangle area)
         {
+            this.PlatformList = new List<Platform>();
+            this.CollectibleList = new List<Collectible>();
+            this.Mesh = new List<Point>();
             this.Matrix = new LevelMatrix(this, area.Height, area.Width);
 
             this.NumberOfPlatforms = nI[0];
