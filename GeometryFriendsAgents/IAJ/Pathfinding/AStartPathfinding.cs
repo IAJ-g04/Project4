@@ -3,6 +3,7 @@ using GeometryFriendsAgents.Model;
 using GeometryFriendsAgents.Pathfinding.DataStructures;
 using GeometryFriendsAgents.Pathfinding.Heuristics;
 using System;
+using System.Collections.Generic;
 
 namespace GeometryFriendsAgents.Pathfinding
 {
@@ -57,7 +58,7 @@ namespace GeometryFriendsAgents.Pathfinding
             this.Closed.Initialize();
         }
 
-        public virtual bool Search(bool returnPartialSolution = false)
+        public virtual bool Search()
         {
             var processedNodes = 0;
             int count;
@@ -121,13 +122,7 @@ namespace GeometryFriendsAgents.Pathfinding
             }
 
             //if the caller wants create a partial Path to reach the current best node so far
-            if (returnPartialSolution)
-            {
-                var bestNodeSoFar = this.Open.PeekBest();
-            }
-            else
-            {
-            }
+            
             return false;
         }
 
@@ -146,10 +141,39 @@ namespace GeometryFriendsAgents.Pathfinding
             return childNodeRecord;
         }
 
-        protected void CalculateSolution(NodeRecord node, bool partial)
+        protected void CalculateSolution(NodeRecord node)
         {
+            List<NodeRecord> plist = new List<NodeRecord>();
+            var currentNode = node;
 
-            throw new NotImplementedException();
+            plist.Add(node);
+            if (currentNode.parent != null)
+            {
+                currentNode = currentNode.parent;
+            }
+
+            while (currentNode.parent != null)
+            {
+                plist.Add(currentNode); //we need to reverse the list because this operator add elements to the end of the list
+
+                if (currentNode.parent.parent == null) break; //this skips the first node
+                currentNode = currentNode.parent;
+            }
+
+            plist.Reverse();
+            var first = plist[0];
+            Connection[] cn = new Connection[plist.Count-1];
+            int i = 0;
+            foreach (NodeRecord nr in plist)
+            {
+                if(!first.Equals(nr))
+                {
+
+                    //cn[i] = nr.parentConnection;
+                    i++;
+                }
+            }
+          //  WM.Path = cn;
         }
 
         public static float F(NodeRecord node)
