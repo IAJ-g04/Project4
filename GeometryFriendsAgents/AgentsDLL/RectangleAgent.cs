@@ -13,6 +13,7 @@ using GeometryFriendsAgents.Model;
 
 using GeometryFriendsAgents.Pathfinding;
 using GeometryFriendsAgents.Pathfinding.Heuristics;
+using GeometryFriendsAgents.DecisionMaking;
 
 namespace GeometryFriendsAgents
 {
@@ -43,7 +44,8 @@ namespace GeometryFriendsAgents
         //LEARNING AGENT
         protected WorldModel Model;
         private ProblemDectectionAlgorithm PdA;
-        private NodeArrayAStarPathFinding AStar; 
+        private NodeArrayAStarPathFinding AStar;
+        private DecisionMakingProcess DMP; 
 
         public RectangleAgent() 
         {
@@ -258,11 +260,11 @@ namespace GeometryFriendsAgents
             this.PdA = new ProblemDectectionAlgorithm(this.Model);
 
             //this.PdA.GeneratePoints();
-            //this.PdA.GenerateConnections();
+            this.PdA.GenerateConnections();
 
             this.AStar = new NodeArrayAStarPathFinding(this.Model, new EuclideanDistanceHeuristic());
 
-
+            this.DMP = new DecisionMakingProcess(this.Model, this.AStar);
 
             DebugSensorsInfo();
         }
@@ -291,10 +293,7 @@ namespace GeometryFriendsAgents
              MORPH_UP = 7
              MORPH_DOWN = 8
             */
-
-            currentAction = 8;
-            return;
-
+            
             currentAction = rnd.Next(5, 9);
 
             if (currentAction == lastAction)
@@ -351,6 +350,8 @@ namespace GeometryFriendsAgents
             rectangleInfo[3] = sI[3];
             rectangleInfo[4] = sI[4];
 
+            this.DMP.CurrentRectangle = new RectangleCharacter(this.Model, rectangleInfo[0], rectangleInfo[1]);
+
             circleInfo[0] = cI[0];
             circleInfo[1] = cI[1];
             circleInfo[2] = cI[2];
@@ -367,8 +368,10 @@ namespace GeometryFriendsAgents
 
                 temp++;
             }
-          //  ConsolePrinter.PrintLine(sI[4].ToString());
+
             
+            //  ConsolePrinter.PrintLine(sI[4].ToString());
+
         }
 
         // this method is deprecated, please use SensorsUpdated instead
@@ -388,13 +391,14 @@ namespace GeometryFriendsAgents
             {
                 if (!(DateTime.Now.Second == 59))
                 {
-                    RandomAction();
+                    this.SetAction(this.DMP.GetNextAction());
                     lastMoveTime = lastMoveTime + 1;
                     //DebugSensorsInfo();
                 }
                 else
                     lastMoveTime = 60;
             }
+
         }
 
         public void toggleDebug()

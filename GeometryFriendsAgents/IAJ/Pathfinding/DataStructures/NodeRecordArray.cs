@@ -13,9 +13,9 @@ namespace GeometryFriendsAgents.Pathfinding.DataStructures
 
         public NodeRecordArray(WorldModel WM) : base(WM)
         {
-            this.NodeRecords = new NodeRecord[WM.Mesh.Count];
+            this.NodeRecords = new NodeRecord[WM.Mesh.Count()];
             
-            for(int i = 0; i < WM.Mesh.Count; i++)
+            for(int i = 0; i < WM.Mesh.Count(); i++)
             {
                 var node = WM.Mesh[i];
                 this.NodeRecords[i] = new NodeRecord {node = node, status = NodeStatus.Unvisited};

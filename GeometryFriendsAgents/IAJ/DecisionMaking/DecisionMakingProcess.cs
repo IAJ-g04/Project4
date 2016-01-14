@@ -32,6 +32,7 @@ namespace GeometryFriendsAgents.DecisionMaking
 
         public int GetNextAction()
         {
+            return 6;
             throw new NotImplementedException();
         }
 
