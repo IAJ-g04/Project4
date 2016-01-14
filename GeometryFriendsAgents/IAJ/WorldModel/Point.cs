@@ -69,5 +69,10 @@ namespace GeometryFriendsAgents.Model
         {
             throw new NotImplementedException();
         }
+
+        public static implicit operator Point(RectangleCharacter v)
+        {
+            return new Point(v.WM, v.xPos, v.yPos);
+        }
     }
 }

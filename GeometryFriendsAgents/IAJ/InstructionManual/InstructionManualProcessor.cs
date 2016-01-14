@@ -11,5 +11,15 @@ namespace GeometryFriendsAgents.InstructionManual
         public InstructionManualProcessor(WorldModel WM) : base(WM)
         {
         }
+
+        public int[] GetSolution(Connection conn)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int[] GetAlternative(Connection conn)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

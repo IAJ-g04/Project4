@@ -34,10 +34,9 @@ namespace GeometryFriendsAgents.Pathfinding
             this.Heuristic = heuristic;
         }
 
-        public void InitializePathfindingSearch(Point startPosition, Point goalPosition)
+        public void InitializePathfindingSearch(RectangleCharacter startPosition)
         {
             this.StartNode = startPosition;
-            this.GoalNode = goalPosition;
             
 
             this.InProgress = true;
