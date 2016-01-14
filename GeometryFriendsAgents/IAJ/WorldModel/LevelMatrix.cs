@@ -104,6 +104,12 @@ namespace GeometryFriendsAgents.Model
             return point;
         }
 
+        public Point GenerateNewPoint(Point p, int dir)
+        {
+            throw new NotImplementedException();
+
+        }
+
         public bool CheckPosition(Point origPoint, int content)
         {
             return (this.Matrix[origPoint.xMatrix, origPoint.yMatrix] == content);

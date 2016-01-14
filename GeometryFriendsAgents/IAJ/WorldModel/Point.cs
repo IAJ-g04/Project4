@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace GeometryFriendsAgents.Model
 {
-    public class Point : WorldObject
+    public class Point : WorldObject, IComparable
     {
         public int CLIFF_POINT = 1;
         public int FALLING_POINT = 2;
@@ -12,7 +12,12 @@ namespace GeometryFriendsAgents.Model
         public int WALL_POINT = 4;
 
         public int categorie;
-        // 1 - Left; 3 - Right
+
+        public int LEFT = 1;
+        public int UP = 2;
+        public int RIGHT = 3;
+        public int DOWN = 4;
+
         public int side;
         public List<Connection> ConnectionList;
 
@@ -59,6 +64,10 @@ namespace GeometryFriendsAgents.Model
         {
             return base.Equals(obj);
         }
-        
+
+        public int CompareTo(object obj)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
