@@ -39,10 +39,10 @@ namespace GeometryFriendsAgents.ProblemDectection
         }
 
         public void GenerateConnections()
-        {
+        {/*
             while(OpenPoints.Count != 0)
             {
-                /*Point op = OpenPoints.getBestAndRemove();
+                Point op = OpenPoints.getBestAndRemove();
                 Point nop = OpenPoints.getBest();
 
                 //Right
@@ -63,22 +63,45 @@ namespace GeometryFriendsAgents.ProblemDectection
                 }
 
                 //Down
-                Point pf = this.WM.Matrix.GenerateNewPoint(op);
+                if (WM.Matrix.checkDownPosition(op))
+                {
+                    Point pf = this.WM.Matrix.GenerateNewPoint(op);
+                    if (WM.Matrix.checkFall(op, STAR)))
+                    {
+                        Point ps = WM.Matrix.giveStar(op, STAR));
+                        if ((op.yPos - pf.yPos) <= 2 * this.WM.Matrix.WORLD_UNIT_SIZE)
+                        {
+                            op.addConnection(new Connection(WM, op, ps));
+                            ps.addConnection(new Connection(WM, ps, op));
+                            ps.addConnection(new Connection(WM, ps, pf));
+                            pf.addConnection(new Connection(WM, pf, ps));
+                        }
+                        //fall
+                        else
+                        {
+                            op.addConnection(new Connection(WM, op, ps));
+                            ps.addConnection(new Connection(WM, ps, pf));
+                        }
 
-                //stair or gem TODO
-                if((op.yPos - pf.yPos) <= 2 * this.WM.Matrix.WORLD_UNIT_SIZE)
-                {
-                    op.addConnection(new Connection(WM, op, pf));
-                    pf.addConnection(new Connection(WM, pf, op));
+                    }
+                    else{ 
+                    //stair or gem TODO
+                        if ((op.yPos - pf.yPos) <= 2 * this.WM.Matrix.WORLD_UNIT_SIZE)
+                        {
+                            op.addConnection(new Connection(WM, op, pf));
+                            pf.addConnection(new Connection(WM, pf, op));
+                        }
+                        //fall
+                        else
+                        {
+                            op.addConnection(new Connection(WM, op, pf));
+                        }
+                    }
+                    this.OpenPoints.Add(pf);
                 }
-                //fall
-                else
-                {
-                    op.addConnection(new Connection(WM, op, pf));
-                }
-                this.OpenPoints.Add(pf);*/
+                WM.Mesh.Add(op);
             }
-        }
+        */}
         
     }
 }
