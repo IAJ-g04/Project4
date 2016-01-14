@@ -7,12 +7,14 @@ using System.Text;
 namespace GeometryFriendsAgents.Model
 {
     public class Platform : WorldObject, IComparable {
-        
+
+        public int ID { private set; get; }
         public float Width { private set; get; }
         public float Height { private set; get; }
 
-        public Platform(WorldModel WM, float xPos, float yPos, float height, float width) : base(WM, xPos, yPos)
+        public Platform(WorldModel WM, int ID, float xPos, float yPos, float height, float width) : base(WM, xPos, yPos)
         {
+            this.ID = ID;
             this.Width = width;
             this.Height = height;
         }
@@ -25,16 +27,41 @@ namespace GeometryFriendsAgents.Model
             get { return xPos - Width / 2; }
         }
 
+        public int LeftMatrix
+        {
+            get { return (int)Math.Floor((Left * this.WM.Matrix.Matrix_Width) / this.WM.Matrix.World_Width); }
+        }
+
         public float Right {
             get { return xPos + Width / 2; }
+        }
+
+        public int RightMatrix
+        {
+            get { return (int)Math.Ceiling((Right * this.WM.Matrix.Matrix_Width) / this.WM.Matrix.World_Width); }
         }
 
         public float Top { 
             get { return yPos - Height / 2; } 
         }
 
+        public float TopPointY
+        {
+            get { return (yPos - (Height / 2)) + this.WM.Matrix.WORLD_UNIT_SIZE; }
+        }
+
+        public int TopMatrix
+        {
+            get { return (int)Math.Floor((Top * this.WM.Matrix.Matrix_Height) / this.WM.Matrix.World_Height); }
+        }
+
         public float Bottom {
             get { return yPos + Height / 2; }
+        }
+
+        public int BottomMatrix
+        {
+            get { return (int)Math.Ceiling((Bottom * this.WM.Matrix.Matrix_Height) / this.WM.Matrix.World_Height); }
         }
 
         public int CompareTo(object obj) {

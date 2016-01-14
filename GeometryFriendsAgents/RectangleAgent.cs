@@ -292,7 +292,7 @@ namespace GeometryFriendsAgents
              MORPH_DOWN = 8
             */
 
-            currentAction = 7;
+            currentAction = 8;
             return;
 
             currentAction = rnd.Next(5, 9);
@@ -367,11 +367,8 @@ namespace GeometryFriendsAgents
 
                 temp++;
             }
-            Console.WriteLine(sI[4]);
-            System.Diagnostics.Debug.WriteLine(sI[4]);
-            ConsolePrinter.Print(sI[4].ToString());
-
-            Console.ReadLine();
+          //  ConsolePrinter.PrintLine(sI[4].ToString());
+            
         }
 
         // this method is deprecated, please use SensorsUpdated instead
