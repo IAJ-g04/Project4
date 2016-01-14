@@ -39,7 +39,11 @@ namespace GeometryFriendsAgents.ProblemDectection
         }
 
         public void GenerateConnections()
-        {/*
+        {
+
+            this.WM.Mesh = new Point[this.OpenPoints.Count];
+            
+            /*
             while(OpenPoints.Count != 0)
             {
                 Point op = OpenPoints.getBestAndRemove();

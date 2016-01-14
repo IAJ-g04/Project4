@@ -16,8 +16,8 @@ namespace GeometryFriendsAgents.Model {
 
         public RectangleCharacter Character { get; private set; }
 
-        public Point[] Mesh { get; private set; }
-        public Connection[] Path { get; private set; }
+        public Point[] Mesh { get; set; }
+        public Connection[] Path { get; set; }
 
         public WorldModel(int[] nI, float[] sI, float[] cI, float[] oI, float[] sPI, float[] cPI, float[] colI, Rectangle area)
         {

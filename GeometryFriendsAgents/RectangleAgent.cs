@@ -259,7 +259,7 @@ namespace GeometryFriendsAgents
             this.Model = new WorldModel(nI,sI, cI, oI, sPI, cPI, colI, area);
             this.PdA = new ProblemDectectionAlgorithm(this.Model);
 
-            this.PdA.GeneratePoints();
+            //this.PdA.GeneratePoints();
             this.PdA.GenerateConnections();
 
             this.AStar = new NodeArrayAStarPathFinding(this.Model, new EuclideanDistanceHeuristic());
@@ -293,10 +293,7 @@ namespace GeometryFriendsAgents
              MORPH_UP = 7
              MORPH_DOWN = 8
             */
-
-            currentAction = 8;
-            return;
-
+            
             currentAction = rnd.Next(5, 9);
 
             if (currentAction == lastAction)
@@ -394,7 +391,7 @@ namespace GeometryFriendsAgents
             {
                 if (!(DateTime.Now.Second == 59))
                 {
-                    this.DMP.GetNextAction();
+                    this.SetAction(this.DMP.GetNextAction());
                     lastMoveTime = lastMoveTime + 1;
                     //DebugSensorsInfo();
                 }

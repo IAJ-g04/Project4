@@ -51,6 +51,8 @@
   <ItemGroup>
     <Compile Include="CircleAgent.cs" />
     <Compile Include="ConsolePrinter.cs" />
+    <Compile Include="IAJ\DecisionMaking\DecisionMakingProcess.cs" />
+    <Compile Include="IAJ\InstructionManual\InstructionManualProcessor.cs" />
     <Compile Include="IAJ\Pathfinding\AStartPathfinding.cs" />
     <Compile Include="IAJ\Pathfinding\DataStructures\IClosedSet.cs" />
     <Compile Include="IAJ\Pathfinding\DataStructures\IOpenSet.cs" />
@@ -81,7 +83,6 @@
   <ItemGroup>
     <Folder Include="AgentsDLL\" />
     <Folder Include="GeometryFriendsFiles\" />
-    <Folder Include="IAJ\InstructionManual\" />
     <Folder Include="IAJ\LearningController\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
