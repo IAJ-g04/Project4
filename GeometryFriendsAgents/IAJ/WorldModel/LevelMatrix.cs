@@ -204,7 +204,7 @@ namespace GeometryFriendsAgents.Model
             float yFalling = p.yPos;
             Point pf = new Point(this.WM, xFalling, yFalling);
             bool res = false;
-            for (int j = pf.yMatrix + 1; j <= this.Matrix_Height; j++)
+            for (int j = pf.yMatrix + 1; j < this.Matrix_Height; j++)
             {
                 if (this.Matrix[pf.xMatrix, j] == STAR)
                 {
