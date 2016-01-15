@@ -33,6 +33,7 @@ namespace GeometryFriendsAgents.ProblemDectection
             foreach (Collectible c in WM.CollectibleList.Values)
             {
                 Point pd = new Point(WM, c.xPos, c.yPos);
+                pd.side = pd.UP;
                 this.OpenPoints.AddToOpen(pd);
             }
         }
@@ -49,55 +50,120 @@ namespace GeometryFriendsAgents.ProblemDectection
                 Point nop = this.OpenPoints.PeekBest();
 
                 //Right
-                if (op.yPos == nop.yPos)
+                if (op.yMatrix == nop.yMatrix)
                 {
-                    //slide
-                    if ((op.xPos - nop.xPos) <= 1 * this.WM.Matrix.WORLD_UNIT_SIZE)
+                    if(!this.WM.Matrix.CheckWallBetween(op, nop))
                     {
-                        op.addConnection(new Connection(WM, op, nop));
-                        nop.addConnection(new Connection(WM, nop, op));
+                        if (this.WM.Matrix.CheckHoleBetween(op, nop))
+                        {
+                            if ((op.xPos - nop.xPos) <= 3 * this.WM.Matrix.WORLD_UNIT_SIZE)
+                            {
+                                Connection c = new Connection(WM, op, nop);
+                                c.categorie = c.SLIDEONHOLE;
+                                c.side = c.RIGHT;
+                                op.addConnection(c);
+                                c = new Connection(WM, nop, op);
+                                c.categorie = c.SLIDEONHOLE;
+                                c.side = c.LEFT;
+                                nop.addConnection(c);
+                            }
+                        }
+                        else 
+                        {
+                            Connection c = new Connection(WM, op, nop);
+                            c.categorie = c.SLIDEONPLATFORM;
+                            c.side = c.RIGHT;
+                            op.addConnection(c);
+                            c = new Connection(WM, nop, op);
+                            c.categorie = c.SLIDEONPLATFORM;
+                            c.side = c.LEFT;
+                            nop.addConnection(c);
+                        }
+
                     }
-                    //fall slide
-                    else if ((op.xPos - nop.xPos) <= 3*this.WM.Matrix.WORLD_UNIT_SIZE)
+                    
+                }
+
+                if (this.WM.Matrix.IsCollectible(op))
+                {
+                    if (!this.WM.Matrix.CheckPlatformBeneath(op))
                     {
-                        op.addConnection(new Connection(WM, op, nop));
-                        nop.addConnection(new Connection(WM, nop, op));
+                        Point pf = this.WM.Matrix.GenerateNewPointFalling(op, this.WM.Matrix.DOWN);
+
+                        if ((op.yPos - pf.yPos) <= 2 * this.WM.Matrix.WORLD_UNIT_SIZE)
+                        {
+                            Connection c = new Connection(WM, op, pf);
+                            c.categorie = c.FALLING;
+                            c.side = c.DOWN;
+                            op.addConnection(c);
+                            c = new Connection(WM, pf, op);
+                            c.categorie = c.GRAB;
+                            c.side = c.UP;
+                            pf.addConnection(c);
+                        }
+
                     }
                 }
 
-                //Down
-                if (this.WM.Matrix.CheckPointForFalling(op))
+                else if (this.WM.Matrix.CheckPointForFalling(op))
                 {
                     Point pf = this.WM.Matrix.GenerateNewPointFalling(op, this.WM.Matrix.DOWN);
                     if (WM.Matrix.CheckDownForStar(op))
                     {
                         Point ps = WM.Matrix.GenerateNewPointFallingStar(op);
-                        if ((op.yPos - pf.yPos) <= 2 * this.WM.Matrix.WORLD_UNIT_SIZE)
+                        if ((op.yPos - pf.yPos) >= 3 * this.WM.Matrix.WORLD_UNIT_SIZE)
                         {
-                            op.addConnection(new Connection(WM, op, ps));
-                            ps.addConnection(new Connection(WM, ps, op));
+                            Connection c = new Connection(WM, op, ps);
+                            c.categorie = c.FALLING;
+                            c.side = c.DOWN;
+                            op.addConnection(c);
+                            c = new Connection(WM, ps, pf);
+                            c.categorie = c.FALLING;
+                            c.side = c.DOWN;
                             ps.addConnection(new Connection(WM, ps, pf));
-                            pf.addConnection(new Connection(WM, pf, ps));
-                        }
-                        //fall
-                        else
+                        } else
                         {
-                            op.addConnection(new Connection(WM, op, ps));
-                            ps.addConnection(new Connection(WM, ps, pf));
+                            if ((op.yPos - pf.yPos) <= 2 * this.WM.Matrix.WORLD_UNIT_SIZE)
+                            {
+                                Connection c = new Connection(WM, op, pf);
+                                c.categorie = c.FALLING;
+                                c.side = c.DOWN;
+                                op.addConnection(c);
+                                c = new Connection(WM, pf, op);
+                                c.categorie = c.CLIMB;
+                                c.side = c.UP;
+                                pf.addConnection(c);
+                            }
+                            //fall
+                            else
+                            {
+                                Connection c = new Connection(WM, op, pf);
+                                c.categorie = c.FALLING;
+                                c.side = c.DOWN;
+                                op.addConnection(c);
+                            }
                         }
-
                     }
                     else{ 
                     //stair or gem TODO
                         if ((op.yPos - pf.yPos) <= 2 * this.WM.Matrix.WORLD_UNIT_SIZE)
                         {
-                            op.addConnection(new Connection(WM, op, pf));
-                            pf.addConnection(new Connection(WM, pf, op));
+                            Connection c = new Connection(WM, op, pf);
+                            c.categorie = c.FALLING;
+                            c.side = c.DOWN;
+                            op.addConnection(c);
+                            c = new Connection(WM, pf, op);
+                            c.categorie = c.CLIMB;
+                            c.side = c.UP;
+                            pf.addConnection(c);
                         }
                         //fall
                         else
                         {
-                            op.addConnection(new Connection(WM, op, pf));
+                            Connection c = new Connection(WM, op, pf);
+                            c.categorie = c.FALLING;
+                            c.side = c.DOWN;
+                            op.addConnection(c);
                         }
                     }
                     this.OpenPoints.AddToOpen(pf);

@@ -110,8 +110,10 @@ namespace GeometryFriendsAgents.Model
             float xFalling;
             if (p.side == LEFT)
                 xFalling = p.xPos - (this.WORLD_UNIT_SIZE / 2);
-            else
+            else if (p.side == RIGHT)
                 xFalling = p.xPos + (this.WORLD_UNIT_SIZE / 2);
+            else
+                xFalling = p.xPos;
 
             if (xFalling < 0)
                 xFalling = 0;
@@ -257,5 +259,79 @@ namespace GeometryFriendsAgents.Model
             return (this.Matrix[xOrig, yOrig] == content);
         }
 
+        public bool CheckHoleBetween(Point a, Point b)
+        {
+            Point left;
+            Point right;
+            if(a.xPos < b.xPos)
+            {
+                left = a;
+                right = b;
+            }
+            else
+            {
+                left = b;
+                right = a;
+            }
+
+            int yPlatforms = left.yMatrix + 1;
+            
+            for (int j = left.xMatrix; j <= right.xMatrix; j++)
+            {
+                if (this.Matrix[j, yPlatforms] == EMPTY)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public bool CheckWallBetween(Point a, Point b)
+        {
+            Point left;
+            Point right;
+            if (a.xPos < b.xPos)
+            {
+                left = a;
+                right = b;
+            }
+            else
+            {
+                left = b;
+                right = a;
+            }
+            
+            for (int j = left.xMatrix; j <= right.xMatrix; j++)
+            {
+                if (this.Matrix[j, left.yMatrix] > 0)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public bool IsCollectible(Point p)
+        {
+            int content = this.Matrix[p.xMatrix, p.yMatrix];
+            Collectible col;
+            bool res = this.WM.CollectibleList.TryGetValue(content, out col);
+            if (res)
+            {
+                return p.Equals(col);
+            }
+            return false;
+        }
+
+        public bool CheckPlatformBeneath(Point p)
+        {
+            float yBeneath = p.yPos - WORLD_UNIT_SIZE;
+            Point pb = new Point(this.WM, p.xPos, yBeneath);
+
+            if (this.Matrix[pb.xMatrix, pb.yMatrix] > 0)
+                return true;
+            else
+                return false;
+        }
     }
 }
