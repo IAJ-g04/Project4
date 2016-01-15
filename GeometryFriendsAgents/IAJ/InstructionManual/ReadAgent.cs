@@ -8,6 +8,7 @@ using GeometryFriendsAgents.Model;
 using System.Collections;
 
 
+
 namespace GeometryFriendsAgents.InstructionManual
 {
     public class ReadAgent
@@ -72,8 +73,8 @@ namespace GeometryFriendsAgents.InstructionManual
         public void Update(Connection c, string s)
         {
             DataRow foundRows;
-
-            string search = "Type = " + c.categorie.ToString() + " and Direction = " + c.side.ToString();
+            
+            string search = "Type = " + c.categorie.ToString() + " and Direction = " + c.side.ToString() + " and Distance = " + c.Distance().ToString();
 
             foundRows = table.Select(search).FirstOrDefault();
 
@@ -83,7 +84,7 @@ namespace GeometryFriendsAgents.InstructionManual
             }
             else
             {
-                table.Rows.Add(c.categorie.ToString(), c.side.ToString(), "distance", s);
+                table.Rows.Add(c.categorie.ToString(), c.side.ToString(), c.Distance(), s);
             }
         }
 
@@ -108,20 +109,27 @@ namespace GeometryFriendsAgents.InstructionManual
 
         public String getAlternative(Connection cc)
         {
-          /*  DataRow[] foundRows;
+            DataRow[] foundRows;
+            DataRow newRow;
 
             string search = "Type = " + cc.categorie.ToString() + " and Direction = " + cc.side.ToString();
             foundRows = table.Select(search);
+            newRow = table.Select(search).FirstOrDefault();
 
             if (foundRows != null)
             {
-                foreach()
-
-
-            }*/
-
-
-                return null;
+                foreach (DataRow row in foundRows)
+                {
+                    int a = Convert.ToInt32(row["Distance"]);
+                    int b = Convert.ToInt32(newRow["Distance"]);
+                    int c = cc.Distance();
+                    if (Math.Abs(c - b) > Math.Abs(c - a))
+                    {  
+                      newRow = row;
+                    }
+                }
+            }          
+            return newRow["Solution"].ToString();                       
         }
 
     }
