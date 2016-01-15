@@ -44,7 +44,7 @@ namespace GeometryFriendsAgents.Model
             }
 
             //ConsolePrinter.PrintLine("World_Width: " + width + " | World_Height: " + height + " | Matrix_Width: " + this.Matrix_Width + " | Matrix_Height: " + this.Matrix_Height);
-
+            
         }
 
         public void InitializeMatrix()
@@ -63,6 +63,14 @@ namespace GeometryFriendsAgents.Model
             foreach (Collectible c in this.WM.CollectibleList.Values)
             {
                 this.Matrix[c.xMatrix, c.yMatrix] = c.ID;
+            }
+
+            for (int i = 0; i < Matrix_Height; i++)
+            {
+                for (int j = 0; j < Matrix_Width; j++)
+                    ConsolePrinter.Print(this.Matrix[j, i] + "\t");
+
+                ConsolePrinter.Print("\r\n");
             }
         }
 
@@ -123,7 +131,7 @@ namespace GeometryFriendsAgents.Model
             float yFalling = p.yPos;
             Point pf = new Point(this.WM, xFalling, yFalling);
             bool res = false;
-            for (int j = pf.yMatrix + 1; j <= this.Matrix_Height; j++)
+            for (int j = pf.yMatrix + 1; j < this.Matrix_Height; j++)
             {
                 if (this.Matrix[pf.xMatrix, j] > 0)
                 {
@@ -162,7 +170,7 @@ namespace GeometryFriendsAgents.Model
             float yFalling = p.yPos;
             Point pf = new Point(this.WM, xFalling, yFalling);
             bool res = false;
-            for (int j = pf.yMatrix + 1; j <= this.Matrix_Height; j++)
+            for (int j = pf.yMatrix + 1; j < this.Matrix_Height; j++)
             {
                 if (this.Matrix[pf.xMatrix, j] == STAR)
                 {
@@ -261,6 +269,11 @@ namespace GeometryFriendsAgents.Model
 
         public bool CheckHoleBetween(Point a, Point b)
         {
+
+            if (a.yMatrix == this.WM.Matrix.Matrix_Height -1) {
+                return false;
+            }
+
             Point left;
             Point right;
             if(a.xPos < b.xPos)
@@ -288,6 +301,7 @@ namespace GeometryFriendsAgents.Model
 
         public bool CheckWallBetween(Point a, Point b)
         {
+
             Point left;
             Point right;
             if (a.xPos < b.xPos)

@@ -71,12 +71,12 @@ namespace GeometryFriendsAgents.Model {
                 int count = 1;
                 while (count <= this.NumberOfCollectibles)
                 {
-                    this.CollectibleList.Add(count, new Collectible(this, count, colI[(count * 2) - 2], colI[(count * 2) - 1]));
+                    this.CollectibleList.Add(-count, new Collectible(this, -count, colI[(count * 2) - 2], colI[(count * 2) - 1]));
                     count++;
                 }
 
             }
-
+            this.Matrix.InitializeMatrix();
         }
 
     }
