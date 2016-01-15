@@ -31,6 +31,7 @@ namespace GeometryFriendsAgents.DecisionMaking
 
         public int GetNextAction(RectangleCharacter cube)
         {
+            return 6;
             if (cube.Equals(CurrentRectangle) && this.CurrentConnectionID != -1)
             {
                 this.CurrentSolution = this.Manual.GetAlternative(this.WM.Path[this.CurrentConnectionID]);

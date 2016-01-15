@@ -31,5 +31,9 @@ namespace GeometryFriendsAgents.Model
             this.Destination = destination;
         }
 
+        public int Distance()
+        {
+            return (int)Math.Round(this.Origin.DistanceTo(this.Destination));
+        }
     }
 }

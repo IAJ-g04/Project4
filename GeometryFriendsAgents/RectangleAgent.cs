@@ -262,7 +262,7 @@ namespace GeometryFriendsAgents
             this.CurrentRectangle = this.Model.Character;
             this.PdA = new ProblemDectectionAlgorithm(this.Model);
 
-            //this.PdA.GeneratePoints();
+            this.PdA.GeneratePoints();
             this.PdA.GenerateConnections();
 
             this.AStar = new NodeArrayAStarPathFinding(this.Model, new EuclideanDistanceHeuristic());

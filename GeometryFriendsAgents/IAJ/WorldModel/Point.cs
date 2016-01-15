@@ -46,19 +46,13 @@ namespace GeometryFriendsAgents.Model
 
         public void addConnection(Connection con)
         {
-            throw new NotImplementedException();
+            this.ConnectionList.Add(con);
         }
 
         public void removeConnection(Connection con)
         {
             throw new NotImplementedException();
         }
-
-        public float DistanceTo(Point otherPoint)
-        {
-            throw new NotImplementedException();
-        }
-
         
         public override bool Equals(object obj)
         {
@@ -67,7 +61,19 @@ namespace GeometryFriendsAgents.Model
 
         public int CompareTo(object obj)
         {
-            throw new NotImplementedException();
+            Point oPoint = (Point)obj;
+            if (oPoint.yPos < this.yPos)
+                return 1;
+            else if (oPoint.yPos == this.yPos) {
+                if (oPoint.xPos < this.xPos)
+                    return 1;
+                else if (oPoint.xPos == this.xPos)
+                    return 0;
+                else
+                    return -1;
+            }
+            else
+                return -1;
         }
 
         public static implicit operator Point(RectangleCharacter v)

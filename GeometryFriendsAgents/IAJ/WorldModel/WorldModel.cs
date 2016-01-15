@@ -9,7 +9,7 @@ namespace GeometryFriendsAgents.Model {
 
         public LevelMatrix Matrix {get; private set;}
         public Dictionary<int, Platform> PlatformList { get; private set; }
-        public List<Collectible> CollectibleList { get; private set; }
+        public Dictionary<int, Collectible> CollectibleList { get; private set; }
 
         public int NumberOfPlatforms { get; private set; }
         public int NumberOfCollectibles { get; private set; }
@@ -22,7 +22,7 @@ namespace GeometryFriendsAgents.Model {
         public WorldModel(int[] nI, float[] sI, float[] cI, float[] oI, float[] sPI, float[] cPI, float[] colI, Rectangle area)
         {
             this.PlatformList = new Dictionary<int, Platform>();
-            this.CollectibleList = new List<Collectible>();
+            this.CollectibleList = new Dictionary<int, Collectible>();
             this.Matrix = new LevelMatrix(this, area.Height, area.Width);
 
             this.NumberOfPlatforms = nI[0];
@@ -71,7 +71,7 @@ namespace GeometryFriendsAgents.Model {
                 int count = 1;
                 while (count <= this.NumberOfCollectibles)
                 {
-                    this.CollectibleList.Add(new Collectible(this, colI[(count * 2) - 2], colI[(count * 2) - 1]));
+                    this.CollectibleList.Add(count, new Collectible(this, count, colI[(count * 2) - 2], colI[(count * 2) - 1]));
                     count++;
                 }
 

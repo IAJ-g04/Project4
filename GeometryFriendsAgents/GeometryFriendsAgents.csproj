@@ -64,6 +64,8 @@
     <Compile Include="IAJ\Pathfinding\Heuristics\ZeroHeuristic.cs" />
     <Compile Include="IAJ\Pathfinding\NodeArrayAStarPathfinding.cs" />
     <Compile Include="IAJ\Pathfinding\NodeRecord.cs" />
+    <Compile Include="IAJ\ProblemDectection\DataStructures\IOpenSet.cs" />
+    <Compile Include="IAJ\ProblemDectection\DataStructures\LeftPriorityList.cs" />
     <Compile Include="IAJ\ProblemDectection\ProblemDetectionAlgorithm.cs" />
     <Compile Include="IAJ\WorldModel\RectangleCharacter.cs" />
     <Compile Include="IAJ\WorldModel\Collectible.cs" />

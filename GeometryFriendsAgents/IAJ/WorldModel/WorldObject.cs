@@ -14,9 +14,7 @@ namespace GeometryFriendsAgents.Model {
         {
             this.xPos = x;
             this.yPos = y;
-
-            this.xMatrix = (int)Math.Round((xPos * this.WM.Matrix.Matrix_Width) / this.WM.Matrix.World_Width);
-            this.yMatrix = (int)Math.Round((yPos * this.WM.Matrix.Matrix_Height) / this.WM.Matrix.World_Height);
+            
         }
 
         protected float _xPos;
@@ -27,6 +25,8 @@ namespace GeometryFriendsAgents.Model {
             {
                 _xPos = value;
                 this.xMatrix = (int)Math.Round((_xPos * this.WM.Matrix.Matrix_Width) / this.WM.Matrix.World_Width);
+                if (this.xMatrix >= this.WM.Matrix.Matrix_Width)
+                    this.xMatrix = this.WM.Matrix.Matrix_Width -1;
             }
             get { return _xPos; }
         }
@@ -39,6 +39,8 @@ namespace GeometryFriendsAgents.Model {
             {
                 _yPos = value;
                 this.yMatrix = (int)Math.Round((_yPos * this.WM.Matrix.Matrix_Height) / this.WM.Matrix.World_Height);
+                if (this.yMatrix >= this.WM.Matrix.Matrix_Height)
+                    this.yMatrix = this.WM.Matrix.Matrix_Height -1;
             }
             get { return _yPos; }
         }
@@ -52,6 +54,14 @@ namespace GeometryFriendsAgents.Model {
             WorldObject wo = (WorldObject)obj;
             return (this.xPos == wo.xPos) &&
                       (this.yPos == wo.yPos);
+        }
+
+        public float DistanceTo(WorldObject wo)
+        {
+            double dX = wo.xPos - this.xPos;
+            double dY = wo.yPos - this.yPos;
+            double multi = dX * dX + dY * dY;
+            return (float)Math.Sqrt(multi);
         }
 
 

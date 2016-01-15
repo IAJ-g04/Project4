@@ -45,7 +45,9 @@ namespace GeometryFriendsAgents
         protected WorldModel Model;
         private ProblemDectectionAlgorithm PdA;
         private NodeArrayAStarPathFinding AStar;
-        private DecisionMakingProcess DMP; 
+        private DecisionMakingProcess DMP;
+
+        private RectangleCharacter CurrentRectangle;
 
         public RectangleAgent() 
         {
@@ -257,9 +259,10 @@ namespace GeometryFriendsAgents
 
 
             this.Model = new WorldModel(nI,sI, cI, oI, sPI, cPI, colI, area);
+            this.CurrentRectangle = this.Model.Character;
             this.PdA = new ProblemDectectionAlgorithm(this.Model);
 
-            //this.PdA.GeneratePoints();
+            this.PdA.GeneratePoints();
             this.PdA.GenerateConnections();
 
             this.AStar = new NodeArrayAStarPathFinding(this.Model, new EuclideanDistanceHeuristic());
@@ -350,7 +353,7 @@ namespace GeometryFriendsAgents
             rectangleInfo[3] = sI[3];
             rectangleInfo[4] = sI[4];
 
-            this.DMP.CurrentRectangle = new RectangleCharacter(this.Model, rectangleInfo[0], rectangleInfo[1]);
+            this.CurrentRectangle = new RectangleCharacter(this.Model, rectangleInfo[0], rectangleInfo[1]);
 
             circleInfo[0] = cI[0];
             circleInfo[1] = cI[1];
@@ -391,7 +394,7 @@ namespace GeometryFriendsAgents
             {
                 if (!(DateTime.Now.Second == 59))
                 {
-                    this.SetAction(this.DMP.GetNextAction());
+                    this.SetAction(this.DMP.GetNextAction(this.CurrentRectangle));
                     lastMoveTime = lastMoveTime + 1;
                     //DebugSensorsInfo();
                 }

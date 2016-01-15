@@ -5,10 +5,12 @@ using System.Text;
 
 namespace GeometryFriendsAgents.Model{
     public class Collectible : WorldObject, IComparable {
+        
+        public int ID { private set; get; }
 
-        public Collectible(WorldModel WM, float xPos, float yPos) : base(WM, xPos, yPos)
+        public Collectible(WorldModel WM, int id, float xPos, float yPos) : base(WM, xPos, yPos)
         {
-
+            this.ID = id;
         }
 
         public double Distance { get; set; }
