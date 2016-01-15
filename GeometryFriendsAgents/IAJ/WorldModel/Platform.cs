@@ -29,7 +29,7 @@ namespace GeometryFriendsAgents.Model
 
         public int LeftMatrix
         {
-            get { return (int)Math.Floor((Left * this.WM.Matrix.Matrix_Width) / this.WM.Matrix.World_Width); }
+            get { return (int)Math.Round((Left * this.WM.Matrix.Matrix_Width) / this.WM.Matrix.World_Width); }
         }
 
         public float Right {
@@ -38,7 +38,11 @@ namespace GeometryFriendsAgents.Model
 
         public int RightMatrix
         {
-            get { return (int)Math.Ceiling((Right * this.WM.Matrix.Matrix_Width) / this.WM.Matrix.World_Width); }
+            get { int right = (int)Math.Round((Right * this.WM.Matrix.Matrix_Width) / this.WM.Matrix.World_Width);
+                if (right >= this.WM.Matrix.Matrix_Width)
+                    right = this.WM.Matrix.Matrix_Width - 1;
+                return right;
+            }
         }
 
         public float Top { 
@@ -52,7 +56,7 @@ namespace GeometryFriendsAgents.Model
 
         public int TopMatrix
         {
-            get { return (int)Math.Floor((Top * this.WM.Matrix.Matrix_Height) / this.WM.Matrix.World_Height); }
+            get { return (int)Math.Round((Top * this.WM.Matrix.Matrix_Height) / this.WM.Matrix.World_Height); }
         }
 
         public float Bottom {
@@ -61,7 +65,13 @@ namespace GeometryFriendsAgents.Model
 
         public int BottomMatrix
         {
-            get { return (int)Math.Ceiling((Bottom * this.WM.Matrix.Matrix_Height) / this.WM.Matrix.World_Height); }
+            get
+            {
+                int bottom = (int)Math.Round((Bottom * this.WM.Matrix.Matrix_Height) / this.WM.Matrix.World_Height);
+                if (bottom >= this.WM.Matrix.Matrix_Height)
+                    bottom = this.WM.Matrix.Matrix_Height - 1;
+                return bottom;
+            }
         }
 
         public int CompareTo(object obj) {
