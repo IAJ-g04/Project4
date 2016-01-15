@@ -231,10 +231,10 @@ namespace GeometryFriendsAgents.Model
         public bool CheckPointForFalling(Point origPoint)
         {
             if (origPoint.side == DOWN)
-                return true;
+                return false;
             //DOWN 
             if (origPoint.yMatrix == this.Matrix_Height -1)
-                return true;
+                return false;
 
             int leftPosX = origPoint.xMatrix - 1;
             int rigthPosX = origPoint.xMatrix + 1;
@@ -242,21 +242,21 @@ namespace GeometryFriendsAgents.Model
             int downPosY = origPoint.yMatrix - 1;
             if (leftPosX >= 0)
             {
-                bool result = (!this.CheckPosition(leftPosX, origPoint.yMatrix, this.WM.Matrix.EMPTY) && !this.CheckPosition(leftPosX, origPoint.yMatrix, this.WM.Matrix.STAR)) && (!this.CheckPosition(leftPosX, downPosY, this.WM.Matrix.EMPTY) && !this.CheckPosition(leftPosX, downPosY, this.WM.Matrix.STAR));
+                bool result = (!this.CheckPosition(leftPosX, origPoint.yMatrix, this.WM.Matrix.PLAT) && !this.CheckPosition(leftPosX, downPosY, this.WM.Matrix.PLAT));
 
                 if (result)
-                    return false;
+                    return true;
             }
 
             if (rigthPosX < this.Matrix_Width)
             {
-                bool result = (!this.CheckPosition(rigthPosX, origPoint.yMatrix, this.WM.Matrix.EMPTY) && !this.CheckPosition(rigthPosX, origPoint.yMatrix, this.WM.Matrix.STAR)) && (!this.CheckPosition(rigthPosX, downPosY, this.WM.Matrix.EMPTY) && !this.CheckPosition(rigthPosX, downPosY, this.WM.Matrix.STAR));
+                bool result = (!this.CheckPosition(rigthPosX, origPoint.yMatrix, this.WM.Matrix.PLAT) && !this.CheckPosition(rigthPosX, downPosY, this.WM.Matrix.PLAT));
 
                 if (result)
-                    return false;
+                    return true;
 
             }
-            return true;
+            return false;
         }
 
         public bool CheckPosition(Point origPoint, int content)
