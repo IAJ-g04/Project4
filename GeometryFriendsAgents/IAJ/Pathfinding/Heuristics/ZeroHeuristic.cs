@@ -5,9 +5,9 @@ namespace GeometryFriendsAgents.Pathfinding.Heuristics
 {
     public class ZeroHeuristic : IHeuristic
     {
-        public float H(Point node, Point goalNode)
+        public float H(NodeRecord node)
         {
-            return 0;
+            return node.node.WM.NumberOfCollectibles - node.Points;
         }
     }
 }

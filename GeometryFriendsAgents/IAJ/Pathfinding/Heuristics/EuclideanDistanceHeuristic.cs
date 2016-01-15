@@ -4,9 +4,9 @@ namespace GeometryFriendsAgents.Pathfinding.Heuristics
 {
     public class EuclideanDistanceHeuristic : IHeuristic
     {
-        public float H(Point node, Point goalNode)
+        public float H(NodeRecord node)
         {
-            return node.DistanceTo(goalNode);
+            return 0;
         }
     }
 }

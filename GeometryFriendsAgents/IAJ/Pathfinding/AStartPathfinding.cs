@@ -15,6 +15,7 @@ namespace GeometryFriendsAgents.Pathfinding
         public uint TotalProcessedNodes { get; protected set; }
         public int MaxOpenNodes { get; protected set; }
         public bool InProgress { get; protected set; }
+        public NodeRecord initialNode { get; protected set; }
 
         public IOpenSet Open { get; protected set; }
         public IClosedSet Closed { get; protected set; }
@@ -43,17 +44,18 @@ namespace GeometryFriendsAgents.Pathfinding
             this.TotalProcessedNodes = 0;
             this.MaxOpenNodes = 0;
 
-            var initialNode = new NodeRecord
+            this.initialNode  = new NodeRecord
             {
                 gValue = 0,
-                hValue = this.Heuristic.H(this.StartNode, this.GoalNode),
-                node = this.StartNode
+                node = this.StartNode,
             };
+            this.initialNode.hValue = this.Heuristic.H(this.initialNode);
 
-            initialNode.fValue = AStarPathfinding.F(initialNode);
+            this.initialNode.fValue = AStarPathfinding.F(this.initialNode);
+            this.initialNode.Points = 0;
 
             this.Open.Initialize(); 
-            this.Open.AddToOpen(initialNode);
+            this.Open.AddToOpen(this.initialNode);
             this.Closed.Initialize();
         }
 
@@ -131,10 +133,10 @@ namespace GeometryFriendsAgents.Pathfinding
             {
                 node = connectionEdge.Destination,
                 parent = parent,
-                gValue = parent.gValue + connectionEdge.Destination.DistanceTo(parent.node),
-                hValue = this.Heuristic.H(connectionEdge.Destination, this.GoalNode)
+                gValue = parent.gValue + connectionEdge.Destination.DistanceTo(parent.node)
             };
 
+            childNodeRecord.hValue = this.Heuristic.H(childNodeRecord);
             childNodeRecord.fValue = F(childNodeRecord);
 
             return childNodeRecord;
@@ -168,7 +170,7 @@ namespace GeometryFriendsAgents.Pathfinding
                 if(!first.Equals(nr))
                 {
 
-                    //cn[i] = nr.parentConnection;
+                    cn[i] = nr.parentConnection;
                     i++;
                 }
             }

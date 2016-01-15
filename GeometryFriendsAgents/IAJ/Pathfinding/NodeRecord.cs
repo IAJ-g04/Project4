@@ -14,6 +14,8 @@ namespace GeometryFriendsAgents.Pathfinding
     {
         public Point node;
         public NodeRecord parent;
+        public Connection parentConnection;
+        public int Points;
         public float gValue;
         public float hValue;
         public float fValue;

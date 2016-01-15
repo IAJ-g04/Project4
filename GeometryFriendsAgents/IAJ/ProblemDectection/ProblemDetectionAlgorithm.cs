@@ -169,6 +169,7 @@ namespace GeometryFriendsAgents.ProblemDectection
                     this.OpenPoints.AddToOpen(pf);
                 }
                 WM.Mesh[pos] = op;
+                pos++;
             }
         }
         
