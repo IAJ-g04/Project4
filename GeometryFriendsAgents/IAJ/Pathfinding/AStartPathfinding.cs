@@ -172,7 +172,7 @@ namespace GeometryFriendsAgents.Pathfinding
                     i++;
                 }
             }
-          //  WM.Path = cn;
+            WM.Path = cn;
         }
 
         public static float F(NodeRecord node)

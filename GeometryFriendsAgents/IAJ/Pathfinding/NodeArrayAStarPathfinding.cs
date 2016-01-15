@@ -87,8 +87,7 @@ namespace GeometryFriendsAgents.Pathfinding
             //this is very unlikely but it might happen that we process all nodes alowed in this cycle but there are no more nodes to process
             if (this.Open.CountOpen() == 0)
             {
-                var bestNodeSoFar = this.Open.PeekBest();
-                this.CalculateSolution(bestNodeSoFar);
+                this.CalculateSolution(bestNode);
                 return true;
             }
 

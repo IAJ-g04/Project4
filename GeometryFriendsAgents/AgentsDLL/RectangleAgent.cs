@@ -265,9 +265,7 @@ namespace GeometryFriendsAgents
             this.PdA.GeneratePoints();
             this.PdA.GenerateConnections();
 
-            this.AStar = new NodeArrayAStarPathFinding(this.Model, new EuclideanDistanceHeuristic());
-
-            this.DMP = new DecisionMakingProcess(this.Model, this.AStar);
+            this.DMP = new DecisionMakingProcess(this.Model);
 
             DebugSensorsInfo();
         }

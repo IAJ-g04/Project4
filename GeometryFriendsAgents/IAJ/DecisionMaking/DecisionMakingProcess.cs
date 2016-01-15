@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using GeometryFriendsAgents.Pathfinding.Heuristics;
 
 namespace GeometryFriendsAgents.DecisionMaking
 {
@@ -21,20 +22,20 @@ namespace GeometryFriendsAgents.DecisionMaking
         public RectangleCharacter CurrentRectangle { set; get; }
 
 
-        public DecisionMakingProcess (WorldModel WM, AStarPathfinding AStar) : base(WM)
+        public DecisionMakingProcess (WorldModel WM) : base(WM)
         {
-            this.AStar = AStar;
+            this.AStar = new NodeArrayAStarPathFinding(WM, new ZeroHeuristic());
             this.Manual = new InstructionManualProcessor(WM);
             this.CurrentConnectionID = -1;
             this.CurrentActionID = -1;
+            this.CurrentRectangle = WM.Character;
         }
 
         public int GetNextAction(RectangleCharacter cube)
         {
-            return 6;
             if (cube.Equals(CurrentRectangle) && this.CurrentConnectionID != -1)
             {
-                this.CurrentSolution = this.Manual.GetAlternative(this.WM.Path[this.CurrentConnectionID]);
+                this.setSolution(this.Manual.getAlternative(this.WM.Path[this.CurrentConnectionID]));
                 this.CurrentActionID = -1;
             }
             
@@ -43,20 +44,22 @@ namespace GeometryFriendsAgents.DecisionMaking
             if (this.CurrentConnectionID == -1 || this.isOutPath()) { 
                 this.AStar.InitializePathfindingSearch(this.CurrentRectangle);
 
-                bool res = false;
-                while (!res) { 
-                    res = this.AStar.Search();
-                }
+                if (this.AStar.InProgress)
+                {
+                    if (this.AStar.Search())
+                    {
 
-                this.CurrentConnectionID = 0;
-                this.CurrentSolution = this.Manual.GetSolution(this.WM.Path[this.CurrentConnectionID]);
-                this.CurrentActionID = -1;
+                        this.CurrentConnectionID = 0;
+                        this.setSolution(this.Manual.getSolution(this.WM.Path[this.CurrentConnectionID]));
+                        this.CurrentActionID = -1;
+                    }
+                }
             }
 
             if (this.isOutConn())
             {
                 this.CurrentConnectionID++;
-                this.CurrentSolution = this.Manual.GetSolution(this.WM.Path[this.CurrentConnectionID]);
+                this.setSolution(this.Manual.getSolution(this.WM.Path[this.CurrentConnectionID]));
                 this.CurrentActionID = -1;
             }
 
@@ -74,6 +77,18 @@ namespace GeometryFriendsAgents.DecisionMaking
         {
 
             throw new NotImplementedException();
+        }
+
+        public void setSolution(String s)
+        {
+            int size = s.Count();
+            this.CurrentSolution = new int[size];
+            int count = 0;
+            foreach(Char c in s)
+            {
+                this.CurrentSolution[count] = Convert.ToInt32(c);
+                count++;
+            }
         }
 
     }
