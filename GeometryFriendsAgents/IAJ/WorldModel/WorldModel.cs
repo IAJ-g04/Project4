@@ -60,6 +60,7 @@ namespace GeometryFriendsAgents.Model {
                     this.PlatformList.Add(count, new Platform(this, count, oI[(count * 4) - 4], oI[(count * 4) - 3], oI[(count * 4) - 2], oI[(count * 4) - 1]));
                     count++;
                 }
+                this.PlatformList.Add(count, new Platform(this, count, this.Matrix.World_Width / 2, this.Matrix.World_Height, 0, this.Matrix.World_Width));
             }
 
             //Collectibles' To Catch Coordinates (X,Y)

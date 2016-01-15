@@ -24,9 +24,9 @@ namespace GeometryFriendsAgents.Model {
             set
             {
                 _xPos = value;
-                this.xMatrix = (int)Math.Round((_xPos * this.WM.Matrix.Matrix_Width) / this.WM.Matrix.World_Width);
+                this.xMatrix = (int)Math.Round((_xPos * (this.WM.Matrix.Matrix_Width - 1)) / this.WM.Matrix.World_Width);
                 if (this.xMatrix >= this.WM.Matrix.Matrix_Width)
-                    this.xMatrix = this.WM.Matrix.Matrix_Width -1;
+                    this.xMatrix = this.WM.Matrix.Matrix_Width - 1;
             }
             get { return _xPos; }
         }
@@ -38,7 +38,7 @@ namespace GeometryFriendsAgents.Model {
             set
             {
                 _yPos = value;
-                this.yMatrix = (int)Math.Round((_yPos * this.WM.Matrix.Matrix_Height) / this.WM.Matrix.World_Height);
+                this.yMatrix = (int)Math.Round((_yPos * (this.WM.Matrix.Matrix_Height - 1)) / this.WM.Matrix.World_Height);
                 if (this.yMatrix >= this.WM.Matrix.Matrix_Height)
                     this.yMatrix = this.WM.Matrix.Matrix_Height -1;
             }

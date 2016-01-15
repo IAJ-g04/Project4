@@ -29,7 +29,13 @@ namespace GeometryFriendsAgents.Model
 
         public int LeftMatrix
         {
-            get { return (int)Math.Round((Left * this.WM.Matrix.Matrix_Width) / this.WM.Matrix.World_Width); }
+            get
+            {
+                int left = (int)Math.Round((Left * (this.WM.Matrix.Matrix_Width - 1)) / this.WM.Matrix.World_Width);
+                if (left >= this.WM.Matrix.Matrix_Width)
+                    left = this.WM.Matrix.Matrix_Width - 1;
+                return left;
+            }
         }
 
         public float Right {
@@ -38,7 +44,7 @@ namespace GeometryFriendsAgents.Model
 
         public int RightMatrix
         {
-            get { int right = (int)Math.Round((Right * this.WM.Matrix.Matrix_Width) / this.WM.Matrix.World_Width);
+            get { int right = (int)Math.Round((Right * (this.WM.Matrix.Matrix_Width - 1)) / this.WM.Matrix.World_Width);
                 if (right >= this.WM.Matrix.Matrix_Width)
                     right = this.WM.Matrix.Matrix_Width - 1;
                 return right;
@@ -56,7 +62,13 @@ namespace GeometryFriendsAgents.Model
 
         public int TopMatrix
         {
-            get { return (int)Math.Round((Top * this.WM.Matrix.Matrix_Height) / this.WM.Matrix.World_Height); }
+            get
+            {
+                int top = (int)Math.Round((Top * (this.WM.Matrix.Matrix_Height - 1)) / this.WM.Matrix.World_Height);
+                if (top >= this.WM.Matrix.Matrix_Height)
+                    top = this.WM.Matrix.Matrix_Height - 1;
+                return top;
+            }
         }
 
         public float Bottom {
@@ -67,7 +79,7 @@ namespace GeometryFriendsAgents.Model
         {
             get
             {
-                int bottom = (int)Math.Round((Bottom * this.WM.Matrix.Matrix_Height) / this.WM.Matrix.World_Height);
+                int bottom = (int)Math.Round((Bottom * (this.WM.Matrix.Matrix_Height - 1)) / this.WM.Matrix.World_Height);
                 if (bottom >= this.WM.Matrix.Matrix_Height)
                     bottom = this.WM.Matrix.Matrix_Height - 1;
                 return bottom;
