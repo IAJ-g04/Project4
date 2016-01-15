@@ -145,6 +145,7 @@ namespace GeometryFriendsAgents.Model
                     if (res)
                     {
                         pf.yPos = plat.TopPointY;
+                        break;
                     }
                 }
             }
@@ -152,6 +153,7 @@ namespace GeometryFriendsAgents.Model
             if (!res)
             {
                 pf.yPos = World_Height - WORLD_UNIT_SIZE;
+                
             }
             
             pf.categorie = pf.FALLING_POINT;
@@ -231,7 +233,7 @@ namespace GeometryFriendsAgents.Model
             if (origPoint.side == DOWN)
                 return true;
             //DOWN 
-            if (origPoint.yMatrix == 0)
+            if (origPoint.yMatrix == this.Matrix_Height -1)
                 return true;
 
             int leftPosX = origPoint.xMatrix - 1;
