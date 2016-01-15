@@ -57,7 +57,7 @@ namespace GeometryFriendsAgents.Model
 
         public float TopPointY
         {
-            get { return (yPos - (Height / 2)) + this.WM.Matrix.WORLD_UNIT_SIZE; }
+            get { return Top + (2 *this.WM.Matrix.WORLD_UNIT_SIZE - 1); }
         }
 
         public int TopMatrix

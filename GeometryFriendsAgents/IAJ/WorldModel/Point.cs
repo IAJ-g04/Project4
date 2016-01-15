@@ -9,7 +9,8 @@ namespace GeometryFriendsAgents.Model
         public int CLIFF_POINT = 1;
         public int FALLING_POINT = 2;
         public int STAIR_POINT = 3;
-        public int WALL_POINT = 4;
+        public int STAR_POINT = 4;
+        public int GRAB_POINT = 5;
 
         public int categorie;
 

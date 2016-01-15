@@ -94,8 +94,12 @@ namespace GeometryFriendsAgents.Model
 
                 if (res)
                 {
+                    if (pTop == p)
+                        ConsolePrinter.PrintLine("son of a bitch");
+
                     if (dir == LEFT)
                     {
+                        ConsolePrinter.PrintLine("ptR " + pTop.Right + " pR " + p.Right);
                         if (pTop.Right < p.Right)
                             point.xPos = pTop.Right;
                         else
@@ -103,6 +107,7 @@ namespace GeometryFriendsAgents.Model
                     }
                     else
                     {
+                        ConsolePrinter.PrintLine("ptL " + pTop.Left + " pL " + p.Left);
                         if (pTop.Left > p.Left)
                             point.xPos = pTop.Left;
                         else
@@ -224,10 +229,10 @@ namespace GeometryFriendsAgents.Model
         public bool CheckPointForFalling(Point origPoint)
         {
             if (origPoint.side == DOWN)
-                return false;
+                return true;
             //DOWN 
             if (origPoint.yMatrix == 0)
-                return false;
+                return true;
 
             int leftPosX = origPoint.xMatrix - 1;
             int rigthPosX = origPoint.xMatrix + 1;
@@ -238,7 +243,7 @@ namespace GeometryFriendsAgents.Model
                 bool result = (!this.CheckPosition(leftPosX, origPoint.yMatrix, this.WM.Matrix.EMPTY) && !this.CheckPosition(leftPosX, origPoint.yMatrix, this.WM.Matrix.STAR)) && (!this.CheckPosition(leftPosX, downPosY, this.WM.Matrix.EMPTY) && !this.CheckPosition(leftPosX, downPosY, this.WM.Matrix.STAR));
 
                 if (result)
-                    return true;
+                    return false;
             }
 
             if (rigthPosX < this.Matrix_Width)
@@ -246,10 +251,10 @@ namespace GeometryFriendsAgents.Model
                 bool result = (!this.CheckPosition(rigthPosX, origPoint.yMatrix, this.WM.Matrix.EMPTY) && !this.CheckPosition(rigthPosX, origPoint.yMatrix, this.WM.Matrix.STAR)) && (!this.CheckPosition(rigthPosX, downPosY, this.WM.Matrix.EMPTY) && !this.CheckPosition(rigthPosX, downPosY, this.WM.Matrix.STAR));
 
                 if (result)
-                    return true;
+                    return false;
 
             }
-            return false;
+            return true;
         }
 
         public bool CheckPosition(Point origPoint, int content)
