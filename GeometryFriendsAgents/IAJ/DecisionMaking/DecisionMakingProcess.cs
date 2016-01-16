@@ -93,7 +93,7 @@ namespace GeometryFriendsAgents.DecisionMaking
 
         public void calculateNewAction()
         {
-            Connection cc = this.WM.Path[this.CurrentConnectionID]);
+            Connection cc = this.WM.Path[this.CurrentConnectionID];
             float xPos = this.CurrentRectangle.xPos;
             float yPos = this.CurrentRectangle.yPos;
             int newAction = 5;
