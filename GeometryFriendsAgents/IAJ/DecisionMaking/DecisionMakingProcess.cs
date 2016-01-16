@@ -33,14 +33,15 @@ namespace GeometryFriendsAgents.DecisionMaking
 
         public int GetNextAction(RectangleCharacter cube)
         {
-            if ((cube.Equals(CurrentRectangle) && this.CurrentConnectionID != -1) || (((this.CurrentActionID >= this.CurrentSolution.Length - 1) && !isOutConn(this.WM.Path[this.CurrentConnectionID]) && !isOnGoal())))
+            if ((cube.Equals(CurrentRectangle) && this.CurrentConnectionID != -1) || 
+                (((this.CurrentConnectionID != -1) && (this.CurrentActionID >= this.CurrentSolution.Length - 1) && !isOutConn(this.WM.Path[this.CurrentConnectionID]) && !isOnGoal())))
             {
                 this.calculateNewAction();
             }
             
             this.CurrentRectangle = cube;
 
-            if(isOnGoal()){
+            if((this.CurrentConnectionID != -1) && isOnGoal()){
                 this.Manual.Update(this.WM.Path[this.CurrentConnectionID], getSolution());
                 this.CurrentConnectionID++;
                 this.setSolution(this.Manual.getSolution(this.WM.Path[this.CurrentConnectionID]));
