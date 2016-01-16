@@ -33,10 +33,9 @@ namespace GeometryFriendsAgents.DecisionMaking
 
         public int GetNextAction(RectangleCharacter cube)
         {
-            if (cube.Equals(CurrentRectangle) && this.CurrentConnectionID != -1)
+            if ((cube.Equals(CurrentRectangle) && this.CurrentConnectionID != -1) || (this.CurrentActionID > this.CurrentSolution.Length))
             {
-                this.setSolution(this.Manual.getAlternative(this.WM.Path[this.CurrentConnectionID]));
-                this.CurrentActionID = -1;
+                this.calculateNewAction();
             }
             
             this.CurrentRectangle = cube;
@@ -55,14 +54,15 @@ namespace GeometryFriendsAgents.DecisionMaking
                     }
                 }
             }
-            /*
-            if (this.isOutConn())
+            
+            if (this.isOutConn(this.WM.Path[CurrentConnectionID]))
             {
+                this.CurrentConnectionID = getNextConnection();
                 this.CurrentConnectionID++;
                 this.setSolution(this.Manual.getSolution(this.WM.Path[this.CurrentConnectionID]));
                 this.CurrentActionID = -1;
             }
-            */
+            
             this.CurrentActionID++;
             return this.CurrentSolution[this.CurrentActionID];
         }
@@ -76,6 +76,16 @@ namespace GeometryFriendsAgents.DecisionMaking
             return false;
 
         }
+
+        public int getNextConnection()
+        {
+
+            return 1;
+        }
+
+
+        //HERE
+        //this.WM.Matrix.WORLD_UNIT_SIZE;
 
         public bool isOutConn(Connection cc)
         {
