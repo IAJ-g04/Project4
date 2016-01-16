@@ -33,12 +33,19 @@ namespace GeometryFriendsAgents.DecisionMaking
 
         public int GetNextAction(RectangleCharacter cube)
         {
-            if ((cube.Equals(CurrentRectangle) && this.CurrentConnectionID != -1) || (this.CurrentActionID > this.CurrentSolution.Length))
+            if ((cube.Equals(CurrentRectangle) && this.CurrentConnectionID != -1) || (((this.CurrentActionID >= this.CurrentSolution.Length - 1) && !isOutConn(this.WM.Path[this.CurrentConnectionID]) && !isOnGoal())))
             {
                 this.calculateNewAction();
             }
             
             this.CurrentRectangle = cube;
+
+            if(isOnGoal()){
+                this.Manual.Update(this.WM.Path[this.CurrentConnectionID], getSolution());
+                this.CurrentConnectionID++;
+                this.setSolution(this.Manual.getSolution(this.WM.Path[this.CurrentConnectionID]));
+                this.CurrentActionID = -1;
+            }
 
             if (this.CurrentConnectionID == -1 || this.isOutPath()) { 
                 this.AStar.InitializePathfindingSearch(this.CurrentRectangle);
@@ -55,14 +62,6 @@ namespace GeometryFriendsAgents.DecisionMaking
                 }
             }
             
-            if (this.isOutConn(this.WM.Path[CurrentConnectionID]))
-            {
-                this.CurrentConnectionID = getNextConnection();
-                this.CurrentConnectionID++;
-                this.setSolution(this.Manual.getSolution(this.WM.Path[this.CurrentConnectionID]));
-                this.CurrentActionID = -1;
-            }
-            
             this.CurrentActionID++;
             return this.CurrentSolution[this.CurrentActionID];
         }
@@ -77,15 +76,13 @@ namespace GeometryFriendsAgents.DecisionMaking
 
         }
 
-        public int getNextConnection()
-        {
-
-            return 1;
-        }
-
-
         //HERE
         //this.WM.Matrix.WORLD_UNIT_SIZE;
+
+        public bool isOnGoal()
+        {
+            return false;
+        }
 
         public bool isOutConn(Connection cc)
         {
@@ -111,6 +108,17 @@ namespace GeometryFriendsAgents.DecisionMaking
                 this.CurrentSolution[count] = int.Parse(s[count].ToString());
             }
         }
+
+        public string getSolution()
+        {
+            string result = "";
+            foreach(int i in this.CurrentSolution)
+            {
+                result = result + i;
+            }
+            return result;
+        }
+
         //this.WM.Matrix.WORLD_UNIT_SIZE
         public void calculateNewAction()
         {
