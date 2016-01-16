@@ -83,11 +83,9 @@ namespace GeometryFriendsAgents.DecisionMaking
         {
             int size = s.Count();
             this.CurrentSolution = new int[size];
-            int count = 0;
-            foreach(Char c in s)
+            for(int count = 0; count < size; count++)
             {
-                this.CurrentSolution[count] = Convert.ToInt32(c);
-                count++;
+                this.CurrentSolution[count] = int.Parse(s[count].ToString());
             }
         }
 
