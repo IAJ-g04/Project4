@@ -93,10 +93,10 @@ namespace GeometryFriendsAgents.DecisionMaking
             float yPos = this.CurrentRectangle.yPos;
 
             if (cc.side == 1)
-                if (xPos > cc.Origin.xPos || xPos < cc.Destination.xPos)
+                if (xPos > cc.Origin.xPos + this.WM.Matrix.WORLD_UNIT_SIZE || xPos < cc.Destination.xPos - this.WM.Matrix.WORLD_UNIT_SIZE)
                     return true;
                 else
-                 if (xPos < cc.Origin.xPos || xPos > cc.Destination.xPos)
+                 if (xPos < cc.Origin.xPos - this.WM.Matrix.WORLD_UNIT_SIZE || xPos > cc.Destination.xPos + this.WM.Matrix.WORLD_UNIT_SIZE)
                     return true;
 
             return false;
@@ -111,20 +111,24 @@ namespace GeometryFriendsAgents.DecisionMaking
                 this.CurrentSolution[count] = int.Parse(s[count].ToString());
             }
         }
-
+        //this.WM.Matrix.WORLD_UNIT_SIZE
         public void calculateNewAction()
         {
             Connection cc = this.WM.Path[this.CurrentConnectionID];
             float xPos = this.CurrentRectangle.xPos;
             float yPos = this.CurrentRectangle.yPos;
             int newAction = 5;
+            float xOriginCheck = Math.Abs(xPos - cc.Origin.xPos);
+            float yOriginCheck = Math.Abs(yPos - cc.Origin.yPos);
+            float xDestinationCheck = Math.Abs(xPos - cc.Destination.xPos);
+            float yDestinationCheck = Math.Abs(yPos - cc.Destination.yPos);
 
             switch (cc.categorie)
             {
                 case 1:
-                    if (yPos != cc.Destination.yPos) // still up
+                    if (yDestinationCheck > this.WM.Matrix.WORLD_UNIT_SIZE) // still up
                     {
-                        if (xPos == cc.Destination.xPos && this.CurrentRectangle.heigth < 192) // is low
+                        if (xDestinationCheck < this.WM.Matrix.WORLD_UNIT_SIZE && this.CurrentRectangle.heigth < 192) // is low
                             newAction = 7;
                         else
                         {
@@ -136,7 +140,7 @@ namespace GeometryFriendsAgents.DecisionMaking
                     }
                     else
                     {
-                        if (xPos != cc.Destination.xPos)
+                        if (xDestinationCheck > this.WM.Matrix.WORLD_UNIT_SIZE)
                         {
                             if (xPos - cc.Destination.xPos < 0)
                                 newAction = 6;
@@ -151,7 +155,7 @@ namespace GeometryFriendsAgents.DecisionMaking
                     break;
 
                 case 2:
-                    if (xPos != cc.Destination.xPos)
+                    if (xDestinationCheck > this.WM.Matrix.WORLD_UNIT_SIZE)
                     {
                         if (xPos - cc.Destination.xPos < 0)
                             newAction = 6;
@@ -164,7 +168,7 @@ namespace GeometryFriendsAgents.DecisionMaking
                     if (this.CurrentRectangle.heigth > 52)
                         newAction = 8;
                     else
-                        if (xPos != cc.Destination.xPos)
+                        if (xDestinationCheck > this.WM.Matrix.WORLD_UNIT_SIZE)
                         {
                             if (xPos - cc.Destination.xPos < 0)
                                 newAction = 6;
@@ -174,7 +178,7 @@ namespace GeometryFriendsAgents.DecisionMaking
                     break;
 
                 case 4:
-                    if (xPos != cc.Destination.xPos)
+                    if (xDestinationCheck > this.WM.Matrix.WORLD_UNIT_SIZE)
                     {
                         if (xPos - cc.Destination.xPos < 0)
                             newAction = 6;
@@ -188,9 +192,9 @@ namespace GeometryFriendsAgents.DecisionMaking
                     break;
 
                 case 5:
-                    if (yPos != cc.Destination.yPos)
+                    if (yDestinationCheck > this.WM.Matrix.WORLD_UNIT_SIZE)
                     {
-                        if (xPos == cc.Origin.xPos)
+                        if (xOriginCheck < this.WM.Matrix.WORLD_UNIT_SIZE)
                         {
 
                             if (this.CurrentRectangle.heigth < 192)
