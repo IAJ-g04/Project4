@@ -163,19 +163,18 @@ namespace GeometryFriendsAgents.Pathfinding
 
             plist.Reverse();
             var first = plist[0];
-            Connection[] cn = new Connection[plist.Count-1];
+            this.WM.Path = new Connection[plist.Count-1];
             int i = 0;
             foreach (NodeRecord nr in plist)
             {
-                ConsolePrinter.PrintLine("aqui: " + nr.node.xMatrix + " y: " + nr.node.xMatrix);
+                ConsolePrinter.PrintLine("aqui: " + nr.parentConnection.Destination.xPos);
                 if(!first.Equals(nr))
                 {
 
-                    cn[i] = nr.parentConnection;
+                    this.WM.Path[i] = nr.parentConnection;
                     i++;
                 }
             }
-            WM.Path = cn;
         }
 
         public static float F(NodeRecord node)

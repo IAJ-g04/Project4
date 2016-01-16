@@ -70,7 +70,7 @@ namespace GeometryFriendsAgents.DecisionMaking
         public bool isOutPath()
         {
 
-            throw new NotImplementedException();
+            return false;
         }
 
         public bool isOutConn()

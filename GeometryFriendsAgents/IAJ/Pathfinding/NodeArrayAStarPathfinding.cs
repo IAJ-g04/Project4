@@ -29,6 +29,7 @@ namespace GeometryFriendsAgents.Pathfinding
             var childNodeRecord = new NodeRecord();
             childNodeRecord.node = childNode;
             childNodeRecord.parent = bestNode;
+            childNodeRecord.parentConnection = connectionEdge;
             if (childNode.categorie == childNode.STAR_POINT)
             {
                 int i = 0;
