@@ -81,6 +81,14 @@ namespace GeometryFriendsAgents.DecisionMaking
 
         public bool isOnGoal()
         {
+            float xPos = this.CurrentRectangle.xPos;
+            float yPos = this.CurrentRectangle.yPos;
+            Connection cc = this.WM.Path[this.CurrentConnectionID];
+
+            if (Math.Abs(xPos - cc.Destination.xPos) < this.WM.Matrix.WORLD_UNIT_SIZE &&
+                Math.Abs(yPos - cc.Destination.yPos) < this.WM.Matrix.WORLD_UNIT_SIZE)
+                return true;
+
             return false;
         }
 
