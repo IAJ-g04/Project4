@@ -152,12 +152,9 @@ namespace GeometryFriendsAgents.Pathfinding
                     this.ProcessChildNode(bestNode, bestNode.node.ConnectionList[i]);
                 }
             }
-
-            //this is very unlikely but it might happen that we process all nodes alowed in this cycle but there are no more nodes to process
-           
-
-            //if the caller wants create a partial Path to reach the current best node so far
-            return false;
+            ConsolePrinter.PrintLine("YOYO");
+            this.CalculateSolution(bestNode);
+            return true;
         }
 
 

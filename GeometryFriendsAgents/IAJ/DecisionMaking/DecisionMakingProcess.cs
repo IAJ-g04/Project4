@@ -55,14 +55,14 @@ namespace GeometryFriendsAgents.DecisionMaking
                     }
                 }
             }
-
+            /*
             if (this.isOutConn())
             {
                 this.CurrentConnectionID++;
                 this.setSolution(this.Manual.getSolution(this.WM.Path[this.CurrentConnectionID]));
                 this.CurrentActionID = -1;
             }
-
+            */
             this.CurrentActionID++;
             return this.CurrentSolution[this.CurrentActionID];
         }
