@@ -100,7 +100,7 @@ namespace GeometryFriendsAgents.InstructionManual
             }
             else
             {
-                return "";
+              return  getAlternative(cc);
             }
 
         }
