@@ -260,6 +260,7 @@ namespace GeometryFriendsAgents
 
             this.Model = new WorldModel(nI,sI, cI, oI, sPI, cPI, colI, area);
             this.CurrentRectangle = this.Model.Character;
+            this.CurrentRectangle.heigth = sI[4];
             this.PdA = new ProblemDectectionAlgorithm(this.Model);
 
             this.PdA.GeneratePoints();
@@ -351,7 +352,7 @@ namespace GeometryFriendsAgents
             rectangleInfo[3] = sI[3];
             rectangleInfo[4] = sI[4];
 
-            this.CurrentRectangle = new RectangleCharacter(this.Model, rectangleInfo[0], rectangleInfo[1]);
+            this.CurrentRectangle = new RectangleCharacter(this.Model, rectangleInfo[0], rectangleInfo[1], sI[4]);
 
             circleInfo[0] = cI[0];
             circleInfo[1] = cI[1];
