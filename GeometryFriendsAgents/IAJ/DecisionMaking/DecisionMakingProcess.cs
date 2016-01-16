@@ -12,7 +12,7 @@ namespace GeometryFriendsAgents.DecisionMaking
     public class DecisionMakingProcess : WorldModelComponent
     {
         public InstructionManualProcessor Manual { private set; get; }
-        public AStarPathfinding AStar { private set; get; }
+        public NodeArrayAStarPathFinding AStar { private set; get; }
 
         public int CurrentConnectionID { private set; get; }
         

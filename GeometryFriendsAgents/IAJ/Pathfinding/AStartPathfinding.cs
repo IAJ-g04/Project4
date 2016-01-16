@@ -167,6 +167,7 @@ namespace GeometryFriendsAgents.Pathfinding
             int i = 0;
             foreach (NodeRecord nr in plist)
             {
+                ConsolePrinter.PrintLine("aqui: " + nr.node.xMatrix + " y: " + nr.node.xMatrix);
                 if(!first.Equals(nr))
                 {
 

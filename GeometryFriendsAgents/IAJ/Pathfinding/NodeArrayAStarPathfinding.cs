@@ -8,11 +8,11 @@ namespace GeometryFriendsAgents.Pathfinding
     public class NodeArrayAStarPathFinding : AStarPathfinding
     {
         protected NodeRecordArray NodeRecordArray { get; set; }
-        protected NodeRecord[] lstars { get; set; }
+        protected List<NodeRecord> lstars { get; set; }
         public NodeArrayAStarPathFinding(WorldModel WM, IHeuristic heuristic) : base(WM,null,null,heuristic)
         {
             this.NodeRecordArray = new NodeRecordArray(WM);
-            this.lstars = new NodeRecord[WM.NumberOfCollectibles];
+            this.lstars = new List<NodeRecord>();
             this.Open = this.NodeRecordArray;
             this.Closed = this.NodeRecordArray;
         }
@@ -24,14 +24,17 @@ namespace GeometryFriendsAgents.Pathfinding
             float h;
 
             var childNode = connectionEdge.Destination;
-            var childNodeRecord = this.NodeRecordArray.GetNodeRecord(childNode);
-            childNodeRecord.parentConnection = connectionEdge;
-            if(childNode.categorie == childNode.STAIR_POINT)
+            //var childNodeRecord = this.NodeRecordArray.GetNodeRecord(childNode);
+
+            var childNodeRecord = new NodeRecord();
+            childNodeRecord.node = childNode;
+            childNodeRecord.parent = bestNode;
+            if (childNode.categorie == childNode.STAR_POINT)
             {
                 int i = 0;
-                while(lstars[i] != null)
+                foreach(NodeRecord nr in lstars)
                 {
-                    if (childNodeRecord.Equals(lstars[i]))
+                    if (childNodeRecord.Equals(nr))
                     {
                         i = -1;
                         break;
@@ -39,7 +42,7 @@ namespace GeometryFriendsAgents.Pathfinding
                     i++;
                 }
                 if(i >= 0) {
-                    lstars[i] = childNodeRecord;
+                    lstars.Add(childNodeRecord);
                     childNodeRecord.Points = i+1;
                 }
                 else
@@ -70,7 +73,6 @@ namespace GeometryFriendsAgents.Pathfinding
                     childNodeRecord.gValue = g;
                     childNodeRecord.hValue = h;
                     childNodeRecord.fValue = f;
-                    childNodeRecord.parent = bestNode;
                     this.NodeRecordArray.Replace(childNodeRecord,childNodeRecord);
                 }
             }
@@ -80,18 +82,48 @@ namespace GeometryFriendsAgents.Pathfinding
                 childNodeRecord.hValue = h;
                 childNodeRecord.fValue = f;
                 childNodeRecord.status = NodeStatus.Open;
-				childNodeRecord.parent = bestNode;
                 this.NodeRecordArray.AddToOpen(childNodeRecord);
             }
         }
 
         public override bool Search()
         {
-            var bestNode = this.initialNode;
+            Point initp = new Point(WM, WM.Character.xPos, WM.Character.yPos);
+            Point aux = new Point(WM, 9999, 9999);
+            float dist = 99999999999;
+            foreach(Point p in WM.Mesh)
+            {
+               float auxd = initp.DistanceTo(p);
+               if(auxd <= dist)
+                {
+                    aux = p;
+                    dist = auxd;
+                }
+            }
+            Connection c = new Connection(WM, initp, aux);
+            c.categorie = c.SLIDEONPLATFORM;
+            if(initp.xPos > aux.xPos)
+            {
+                c.side = c.LEFT;
+            }
+            else
+            {
+                c.side = c.RIGHT;
+            }
+            initp.addConnection(c);
+            NodeRecord nri = new NodeRecord();
+            nri.node = initp;
+            nri.gValue = 0;
+            nri.hValue = 0;
+            nri.fValue = 0;
+            nri.Points = 0;
+            var bestNode = nri;
+            this.NodeRecordArray.AddToOpen(bestNode);
             while (bestNode.Points < WM.NumberOfCollectibles){
 
                 if (this.Open.CountOpen() == 0)
                 {
+                    ConsolePrinter.PrintLine("YOYO");
                     this.CalculateSolution(bestNode);
                     return true;
                 }
