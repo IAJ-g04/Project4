@@ -69,14 +69,27 @@ namespace GeometryFriendsAgents.DecisionMaking
 
         public bool isOutPath()
         {
+            foreach (Connection cc in this.WM.Path)
+                if (isOutConn(cc))
+                    return true;
 
-            throw new NotImplementedException();
+            return false;
+            
         }
 
-        public bool isOutConn()
+        public bool isOutConn(Connection cc)
         {
+            float xPos = this.CurrentRectangle.xPos;
+            float yPos = this.CurrentRectangle.yPos;
 
-            throw new NotImplementedException();
+            if (cc.side == 1)
+                if (xPos > cc.Origin.xPos || xPos < cc.Destination.xPos)
+                    return true;
+                else
+                 if (xPos < cc.Origin.xPos || xPos > cc.Destination.xPos)
+                    return true;
+
+            return false;
         }
 
         public void setSolution(String s)
@@ -93,7 +106,7 @@ namespace GeometryFriendsAgents.DecisionMaking
 
         public void calculateNewAction()
         {
-            Connection cc = this.WM.Path[this.CurrentConnectionID]);
+            Connection cc = this.WM.Path[this.CurrentConnectionID];
             float xPos = this.CurrentRectangle.xPos;
             float yPos = this.CurrentRectangle.yPos;
             int newAction = 5;
