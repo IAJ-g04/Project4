@@ -17,7 +17,7 @@ namespace GeometryFriendsAgents.DecisionMaking
         public int CurrentConnectionID { private set; get; }
         
         public int CurrentActionID { private set; get; }
-        public int[] CurrentSolution { private set; get; }
+        public int[] CurrentSolution;
         
         public RectangleCharacter CurrentRectangle { set; get; }
 
@@ -91,5 +91,123 @@ namespace GeometryFriendsAgents.DecisionMaking
             }
         }
 
+        public void calculateNewAction()
+        {
+            Connection cc = this.WM.Path[this.CurrentConnectionID]);
+            float xPos = this.CurrentRectangle.xPos;
+            float yPos = this.CurrentRectangle.yPos;
+            int newAction = 5;
+
+            switch (cc.categorie)
+            {
+                case 1:
+                    if (yPos != cc.Destination.yPos) // still up
+                    {
+                        if (xPos == cc.Destination.xPos && this.CurrentRectangle.heigth < 192) // is low
+                            newAction = 7;
+                        else
+                        {
+                            if (xPos - cc.Destination.xPos < 0)
+                                newAction = 6;
+                            else
+                                newAction = 5;
+                        }
+                    }
+                    else
+                    {
+                        if (xPos != cc.Destination.xPos)
+                        {
+                            if (xPos - cc.Destination.xPos < 0)
+                                newAction = 6;
+                            else
+                                newAction = 5;
+                        }
+                        else
+                        {
+                            newAction = 8;
+                        }
+                    }
+                    break;
+
+                case 2:
+                    if (xPos != cc.Destination.xPos)
+                    {
+                        if (xPos - cc.Destination.xPos < 0)
+                            newAction = 6;
+                        else
+                            newAction = 5;
+                    }
+                    break;
+
+                case 3:
+                    if (this.CurrentRectangle.heigth > 52)
+                        newAction = 8;
+                    else
+                        if (xPos != cc.Destination.xPos)
+                        {
+                            if (xPos - cc.Destination.xPos < 0)
+                                newAction = 6;
+                            else
+                                newAction = 5;
+                        }
+                    break;
+
+                case 4:
+                    if (xPos != cc.Destination.xPos)
+                    {
+                        if (xPos - cc.Destination.xPos < 0)
+                            newAction = 6;
+                        else
+                            newAction = 5;
+                    }
+                    else
+                    {
+                        newAction = 7;
+                    }
+                    break;
+
+                case 5:
+                    if (yPos != cc.Destination.yPos)
+                    {
+                        if (xPos == cc.Origin.xPos)
+                        {
+
+                            if (this.CurrentRectangle.heigth < 192)
+                                newAction = 7;
+                            else
+                                if (xPos - cc.Destination.xPos < 0)
+                                newAction = 6;
+                            else
+                                newAction = 5;
+                        }
+                        else
+                        {
+                            if (xPos - cc.Origin.xPos < 0)
+                                newAction = 6;
+                            else
+                                newAction = 5;
+                        }
+                    }
+                    else
+                    {
+                      if (xPos - cc.Destination.xPos < 0)
+                            newAction = 6;
+                      else
+                            newAction = 5;
+                        
+                    }
+                    break;
+
+                default:
+                    if (xPos - cc.Destination.xPos < 0)
+                        newAction = 6;
+                    else
+                        newAction = 5;
+                    break;
+            }
+            Array.Resize(ref CurrentSolution, CurrentSolution.Length + 1);
+            CurrentActionID++;
+            CurrentSolution[CurrentActionID] = newAction;
+        }
     }
 }
