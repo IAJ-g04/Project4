@@ -124,7 +124,7 @@ namespace GeometryFriendsAgents.Pathfinding
 
                 if (this.Open.CountOpen() == 0)
                 {
-                    ConsolePrinter.PrintLine("YOYO");
+                    //ConsolePrinter.PrintLine("YOYO");
                     this.CalculateSolution(bestNode);
                     return true;
                 }
@@ -153,7 +153,7 @@ namespace GeometryFriendsAgents.Pathfinding
                     this.ProcessChildNode(bestNode, bestNode.node.ConnectionList[i]);
                 }
             }
-            ConsolePrinter.PrintLine("YOYO");
+            //ConsolePrinter.PrintLine("YOYO");
             this.CalculateSolution(bestNode);
             return true;
         }

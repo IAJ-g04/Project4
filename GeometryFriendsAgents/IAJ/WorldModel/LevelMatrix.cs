@@ -65,6 +65,11 @@ namespace GeometryFriendsAgents.Model
                 this.Matrix[c.xMatrix, c.yMatrix] = c.ID;
             }
 
+         
+        }
+
+        public void PrintMatrix()
+        {
             for (int i = 0; i < Matrix_Height; i++)
             {
                 for (int j = 0; j < Matrix_Width; j++)
@@ -94,12 +99,10 @@ namespace GeometryFriendsAgents.Model
 
                 if (res)
                 {
-                    if (pTop == p)
-                        ConsolePrinter.PrintLine("son of a bitch");
 
                     if (dir == LEFT)
                     {
-                        ConsolePrinter.PrintLine("ptR " + pTop.Right + " pR " + p.Right);
+                        //ConsolePrinter.PrintLine("ptR " + pTop.Right + " pR " + p.Right);
                         if (pTop.Right < p.Right)
                             point.xPos = pTop.Right;
                         else
@@ -107,7 +110,7 @@ namespace GeometryFriendsAgents.Model
                     }
                     else
                     {
-                        ConsolePrinter.PrintLine("ptL " + pTop.Left + " pL " + p.Left);
+                        //ConsolePrinter.PrintLine("ptL " + pTop.Left + " pL " + p.Left);
                         if (pTop.Left > p.Left)
                             point.xPos = pTop.Left;
                         else

@@ -167,7 +167,7 @@ namespace GeometryFriendsAgents.Pathfinding
             int i = 0;
             foreach (NodeRecord nr in plist)
             {
-                ConsolePrinter.PrintLine("aqui: " + nr.parentConnection.Destination.xPos);
+                //ConsolePrinter.PrintLine("aqui: " + nr.parentConnection.Destination.xPos);
                 if(!first.Equals(nr))
                 {
 
