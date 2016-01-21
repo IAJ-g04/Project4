@@ -48,6 +48,9 @@ namespace GeometryFriendsAgents.DecisionMaking
                 this.CurrentConnectionID++;
                 this.setSolution(this.Manual.getSolution(this.WM.Path[this.CurrentConnectionID]));
                 this.CurrentActionID = -1;
+
+
+
             }
 
             if (this.CurrentConnectionID == -1 || this.isOutPath()) { 
@@ -58,8 +61,14 @@ namespace GeometryFriendsAgents.DecisionMaking
                     if (this.AStar.Search())
                     {
                         this.CurrentConnectionID = 0;
-                        this.setSolution(this.Manual.getSolution(this.WM.Path[this.CurrentConnectionID]));
                         this.CurrentActionID = -1;
+
+                        if(this.CurrentRectangle.heigth < 60)
+                            this.setSolution(this.Manual.getSolution(this.WM.Path[this.CurrentConnectionID]));
+                        else if(this.CurrentRectangle.heigth < 150)
+                            this.setSolution("8"+this.Manual.getSolution(this.WM.Path[this.CurrentConnectionID]));
+                        else
+                            this.setSolution("88"+this.Manual.getSolution(this.WM.Path[this.CurrentConnectionID]));
                     } 
                 } 
             }
