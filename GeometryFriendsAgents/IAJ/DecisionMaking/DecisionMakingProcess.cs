@@ -29,6 +29,7 @@ namespace GeometryFriendsAgents.DecisionMaking
             this.CurrentConnectionID = -1;
             this.CurrentActionID = -1;
             this.CurrentRectangle = WM.Character;
+            this.CurrentSolution = new int[0];
         }
 
         public int GetNextAction(RectangleCharacter cube)
@@ -53,16 +54,28 @@ namespace GeometryFriendsAgents.DecisionMaking
 
                 if (this.AStar.InProgress)
                 {
+                    ConsolePrinter.PrintLine("Again");
                     if (this.AStar.Search())
                     {
-
+                        ConsolePrinter.PrintLine("In Search");
                         this.CurrentConnectionID = 0;
                         this.setSolution(this.Manual.getSolution(this.WM.Path[this.CurrentConnectionID]));
                         this.CurrentActionID = -1;
+                    } else
+                    {
+
+                        ConsolePrinter.PrintLine("Improvise");
+                        this.calculateNewAction();
                     }
+                } else
+                {
+                    ConsolePrinter.PrintLine("Improvise again");
+                    this.calculateNewAction();
                 }
             }
-            
+
+
+            ConsolePrinter.PrintLine("Qué");
             this.CurrentActionID++;
             return this.CurrentSolution[this.CurrentActionID];
         }

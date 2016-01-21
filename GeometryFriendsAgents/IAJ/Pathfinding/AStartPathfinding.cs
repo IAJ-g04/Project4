@@ -37,25 +37,48 @@ namespace GeometryFriendsAgents.Pathfinding
 
         public void InitializePathfindingSearch(RectangleCharacter startPosition)
         {
-            this.StartNode = startPosition;
+            Point initp = new Point(WM, WM.Character.xPos, WM.Character.yPos);
+            Point aux = new Point(WM, 9999, 9999);
+            float dist = 99999999999;
+            foreach (Point p in WM.Mesh)
+            {
+                float auxd = initp.DistanceTo(p);
+                if (auxd <= dist)
+                {
+                    aux = p;
+                    dist = auxd;
+                }
+            }
+            Connection c = new Connection(WM, initp, aux);
+            c.categorie = c.SLIDEONPLATFORM;
+            if (initp.xPos > aux.xPos)
+            {
+                c.side = c.LEFT;
+            }
+            else
+            {
+                c.side = c.RIGHT;
+            }
+            initp.addConnection(c);
+            NodeRecord nri = new NodeRecord();
+            nri.node = initp;
+            nri.gValue = 0;
+            nri.hValue = 0;
+            nri.fValue = 0;
+            nri.Points = 0;
+            var bestNode = nri;
+            this.StartNode = initp;
+
             
 
             this.InProgress = true;
             this.TotalProcessedNodes = 0;
             this.MaxOpenNodes = 0;
+            
 
-            this.initialNode  = new NodeRecord
-            {
-                gValue = 0,
-                node = this.StartNode,
-            };
-            this.initialNode.hValue = this.Heuristic.H(this.initialNode);
+            this.Open.Initialize();
 
-            this.initialNode.fValue = AStarPathfinding.F(this.initialNode);
-            this.initialNode.Points = 0;
-
-            this.Open.Initialize(); 
-            this.Open.AddToOpen(this.initialNode);
+            this.Open.AddToOpen(bestNode);
             this.Closed.Initialize();
         }
 
@@ -175,6 +198,7 @@ namespace GeometryFriendsAgents.Pathfinding
                     i++;
                 }
             }
+            this.InProgress = false;
         }
 
         public static float F(NodeRecord node)

@@ -89,43 +89,14 @@ namespace GeometryFriendsAgents.Pathfinding
 
         public override bool Search()
         {
-            Point initp = new Point(WM, WM.Character.xPos, WM.Character.yPos);
-            Point aux = new Point(WM, 9999, 9999);
-            float dist = 99999999999;
-            foreach(Point p in WM.Mesh)
-            {
-               float auxd = initp.DistanceTo(p);
-               if(auxd <= dist)
-                {
-                    aux = p;
-                    dist = auxd;
-                }
-            }
-            Connection c = new Connection(WM, initp, aux);
-            c.categorie = c.SLIDEONPLATFORM;
-            if(initp.xPos > aux.xPos)
-            {
-                c.side = c.LEFT;
-            }
-            else
-            {
-                c.side = c.RIGHT;
-            }
-            initp.addConnection(c);
-            NodeRecord nri = new NodeRecord();
-            nri.node = initp;
-            nri.gValue = 0;
-            nri.hValue = 0;
-            nri.fValue = 0;
-            nri.Points = 0;
-            var bestNode = nri;
-            this.NodeRecordArray.AddToOpen(bestNode);
+            var bestNode = this.NodeRecordArray.PeekBest();
             while (bestNode.Points < WM.NumberOfCollectibles){
 
                 if (this.Open.CountOpen() == 0)
                 {
                     //ConsolePrinter.PrintLine("YOYO");
                     this.CalculateSolution(bestNode);
+                    ConsolePrinter.PrintLine("Zero cenas");
                     return true;
                 }
 
@@ -154,6 +125,8 @@ namespace GeometryFriendsAgents.Pathfinding
                 }
             }
             //ConsolePrinter.PrintLine("YOYO");
+
+            ConsolePrinter.PrintLine("All Collectibles");
             this.CalculateSolution(bestNode);
             return true;
         }
