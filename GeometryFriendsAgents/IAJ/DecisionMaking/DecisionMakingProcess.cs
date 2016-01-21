@@ -248,7 +248,6 @@ namespace GeometryFriendsAgents.DecisionMaking
                     break;
             }
             Array.Resize(ref CurrentSolution, CurrentSolution.Length + 1);
-            CurrentActionID++;
             CurrentSolution[CurrentActionID] = newAction;
         }
     }
