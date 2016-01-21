@@ -43,6 +43,7 @@ namespace GeometryFriendsAgents.DecisionMaking
             this.CurrentRectangle = cube;
 
             if((this.CurrentConnectionID != -1) && isOnGoal()){
+                
                 this.Manual.Update(this.WM.Path[this.CurrentConnectionID], getSolution());
                 this.CurrentConnectionID++;
                 this.setSolution(this.Manual.getSolution(this.WM.Path[this.CurrentConnectionID]));
@@ -54,39 +55,26 @@ namespace GeometryFriendsAgents.DecisionMaking
 
                 if (this.AStar.InProgress)
                 {
-                    ConsolePrinter.PrintLine("Again");
                     if (this.AStar.Search())
                     {
-                        ConsolePrinter.PrintLine("In Search");
                         this.CurrentConnectionID = 0;
                         this.setSolution(this.Manual.getSolution(this.WM.Path[this.CurrentConnectionID]));
                         this.CurrentActionID = -1;
-                    } else
-                    {
-
-                        ConsolePrinter.PrintLine("Improvise");
-                        this.calculateNewAction();
-                    }
-                } else
-                {
-                    ConsolePrinter.PrintLine("Improvise again");
-                    this.calculateNewAction();
-                }
+                    } 
+                } 
             }
 
-
-            ConsolePrinter.PrintLine("Qué");
+            
             this.CurrentActionID++;
             return this.CurrentSolution[this.CurrentActionID];
         }
 
         public bool isOutPath()
         {
+            bool result = true;
             foreach (Connection cc in this.WM.Path)
-                if (isOutConn(cc))
-                    return true;
-
-            return false;
+                result &= isOutConn(cc);
+            return result;
 
         }
 
@@ -111,7 +99,7 @@ namespace GeometryFriendsAgents.DecisionMaking
             float xPos = this.CurrentRectangle.xPos;
             float yPos = this.CurrentRectangle.yPos;
 
-            if (cc.side == 1)
+            if (cc.side == cc.LEFT)
                 if (xPos > cc.Origin.xPos + this.WM.Matrix.WORLD_UNIT_SIZE || xPos < cc.Destination.xPos - this.WM.Matrix.WORLD_UNIT_SIZE)
                     return true;
                 else

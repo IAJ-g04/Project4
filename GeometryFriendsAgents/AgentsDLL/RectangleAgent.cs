@@ -385,17 +385,19 @@ namespace GeometryFriendsAgents
         public void Update(TimeSpan elapsedGameTime) {
 
             //Console.WriteLine("    now = {0}   --  square last {1} ", DateTime.Now.Second, lastMoveTime);
-            
+
+            //Every second one new action is choosen
             if (lastMoveTime == 60)
                 lastMoveTime = 0;
-
             if ((lastMoveTime) <= (DateTime.Now.Second) && (lastMoveTime < 60))
             {
                 if (!(DateTime.Now.Second == 59))
                 {
-                    this.SetAction(this.DMP.GetNextAction(this.CurrentRectangle));
+
                     lastMoveTime = lastMoveTime + 1;
-                    //DebugSensorsInfo();
+                    this.SetAction(this.DMP.GetNextAction(this.CurrentRectangle));
+                   // RandomAction();
+                    DebugSensorsInfo();
                 }
                 else
                     lastMoveTime = 60;

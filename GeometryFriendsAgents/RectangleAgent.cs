@@ -398,18 +398,10 @@ namespace GeometryFriendsAgents
                     this.SetAction(this.DMP.GetNextAction(this.CurrentRectangle));
                    // RandomAction();
                     DebugSensorsInfo();
-                    ConsolePrinter.PrintLine("?????");
                 }
                 else
-                {
                     lastMoveTime = 60;
-
-                    ConsolePrinter.PrintLine("inner");
-                }
-
             }
-
-            ConsolePrinter.PrintLine(lastMoveTime.ToString());
 
         }
 

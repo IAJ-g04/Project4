@@ -96,7 +96,7 @@ namespace GeometryFriendsAgents.Pathfinding
                 {
                     //ConsolePrinter.PrintLine("YOYO");
                     this.CalculateSolution(bestNode);
-                    ConsolePrinter.PrintLine("Zero cenas");
+                    //ConsolePrinter.PrintLine("Zero cenas");
                     return true;
                 }
 
@@ -126,7 +126,7 @@ namespace GeometryFriendsAgents.Pathfinding
             }
             //ConsolePrinter.PrintLine("YOYO");
 
-            ConsolePrinter.PrintLine("All Collectibles");
+            //ConsolePrinter.PrintLine("All Collectibles");
             this.CalculateSolution(bestNode);
             return true;
         }
