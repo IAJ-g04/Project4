@@ -20,7 +20,27 @@ namespace GeometryFriendsAgents.Model
         public int RIGHT = 3;
         public int DOWN = 4;
 
-        public int side;
+        public int height
+        {
+            get {
+            if (this.Destination.yPos > this.Origin.yPos)
+                return DOWN;
+            else
+                return UP;
+            }
+        }
+
+        public int side
+        {
+            get
+            {
+                if (this.Destination.xPos > this.Origin.xPos)
+                return RIGHT;
+                else
+                return LEFT;
+
+            }
+        }
 
         public Point Origin { get; private set; }
         public Point Destination { get; private set; }
@@ -35,5 +55,7 @@ namespace GeometryFriendsAgents.Model
         {
             return (int)Math.Round(this.Origin.DistanceTo(this.Destination));
         }
+
+     
     }
 }

@@ -51,14 +51,6 @@ namespace GeometryFriendsAgents.Pathfinding
             }
             Connection c = new Connection(WM, initp, aux);
             c.categorie = c.SLIDEONPLATFORM;
-            if (initp.xPos > aux.xPos)
-            {
-                c.side = c.LEFT;
-            }
-            else
-            {
-                c.side = c.RIGHT;
-            }
             initp.addConnection(c);
             NodeRecord nri = new NodeRecord();
             nri.node = initp;

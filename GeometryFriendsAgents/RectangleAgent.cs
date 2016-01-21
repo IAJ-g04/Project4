@@ -396,7 +396,6 @@ namespace GeometryFriendsAgents
 
                     lastMoveTime = lastMoveTime + 1;
                     this.SetAction(this.DMP.GetNextAction(this.CurrentRectangle));
-                    ConsolePrinter.PrintLine("current action -> " + currentAction.ToString());
                    // RandomAction();
                     DebugSensorsInfo();
                 }

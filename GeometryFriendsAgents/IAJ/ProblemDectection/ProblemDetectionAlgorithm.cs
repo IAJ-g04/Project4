@@ -69,11 +69,9 @@ namespace GeometryFriendsAgents.ProblemDectection
                                 {
                                     Connection c = new Connection(WM, op, nop);
                                     c.categorie = c.SLIDEONHOLE;
-                                    c.side = c.RIGHT;
                                     op.addConnection(c);
                                     c = new Connection(WM, nop, op);
                                     c.categorie = c.SLIDEONHOLE;
-                                    c.side = c.LEFT;
                                     nop.addConnection(c);
                                 }
                             }
@@ -81,11 +79,9 @@ namespace GeometryFriendsAgents.ProblemDectection
                             {
                                 Connection c = new Connection(WM, op, nop);
                                 c.categorie = c.SLIDEONPLATFORM;
-                                c.side = c.RIGHT;
                                 op.addConnection(c);
                                 c = new Connection(WM, nop, op);
                                 c.categorie = c.SLIDEONPLATFORM;
-                                c.side = c.LEFT;
                                 nop.addConnection(c);
                             }
 
@@ -102,11 +98,9 @@ namespace GeometryFriendsAgents.ProblemDectection
                             {
                                 Connection c = new Connection(WM, op, pf);
                                 c.categorie = c.FALLING;
-                                c.side = c.DOWN;
                                 op.addConnection(c);
                                 c = new Connection(WM, pf, op);
                                 c.categorie = c.GRAB;
-                                c.side = c.UP;
                                 pf.addConnection(c);
                                 pf.categorie = pf.GRAB_POINT;
                             }
@@ -114,7 +108,6 @@ namespace GeometryFriendsAgents.ProblemDectection
                             {
                                 Connection c = new Connection(WM, op, pf);
                                 c.categorie = c.FALLING;
-                                c.side = c.DOWN;
                                 op.addConnection(new Connection(WM, op, pf));
                             }
                             this.OpenPoints.AddToOpen(pf);
@@ -134,7 +127,6 @@ namespace GeometryFriendsAgents.ProblemDectection
                                 ps = OpenPoints.SearchInOpen(ps);
                                 Connection c = new Connection(WM, op, ps);
                                 c.categorie = c.FALLING;
-                                c.side = c.DOWN;
                                 op.addConnection(c);
                               
                             }
@@ -142,11 +134,9 @@ namespace GeometryFriendsAgents.ProblemDectection
                             {
                                     Connection c = new Connection(WM, op, pf);
                                     c.categorie = c.FALLING;
-                                    c.side = c.DOWN;
                                     op.addConnection(c);
                                     c = new Connection(WM, pf, op);
                                     c.categorie = c.CLIMB;
-                                    c.side = c.UP;
                                     pf.categorie = pf.STAIR_POINT;
                                     pf.addConnection(c);
                             }
@@ -158,11 +148,9 @@ namespace GeometryFriendsAgents.ProblemDectection
                             {
                                 Connection c = new Connection(WM, op, pf);
                                 c.categorie = c.FALLING;
-                                c.side = c.DOWN;
                                 op.addConnection(c);
                                 c = new Connection(WM, pf, op);
                                 c.categorie = c.CLIMB;
-                                c.side = c.UP;
                                 pf.categorie = pf.STAIR_POINT;
                                 pf.addConnection(c);
                             }
@@ -171,7 +159,6 @@ namespace GeometryFriendsAgents.ProblemDectection
                             {
                                 Connection c = new Connection(WM, op, pf);
                                 c.categorie = c.FALLING;
-                                c.side = c.DOWN;
                                 op.addConnection(c);
                             }
                         }
