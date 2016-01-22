@@ -69,6 +69,14 @@ namespace GeometryFriendsAgents.Model {
             return (float)Math.Sqrt(multi);
         }
 
+        public float DistanceToInX(WorldObject wo)
+        {
+           return Math.Abs(wo.xPos - this.xPos);
+        }
 
+        public float DistanceToInY(WorldObject wo)
+        {
+            return Math.Abs(wo.yPos - this.yPos);
+        }
     }
 }

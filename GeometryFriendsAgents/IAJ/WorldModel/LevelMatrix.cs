@@ -65,7 +65,8 @@ namespace GeometryFriendsAgents.Model
                 this.Matrix[c.xMatrix, c.yMatrix] = c.ID;
             }
 
-         
+            PrintMatrix();
+
         }
 
         public void PrintMatrix()
@@ -125,11 +126,9 @@ namespace GeometryFriendsAgents.Model
         {
             float xFalling;
             if (p.side == LEFT)
-                xFalling = p.xPos - (this.WORLD_UNIT_SIZE / 2);
-            else if (p.side == RIGHT)
-                xFalling = p.xPos + (this.WORLD_UNIT_SIZE / 2);
+                xFalling = p.xPos - this.WORLD_UNIT_SIZE;
             else
-                xFalling = p.xPos;
+                xFalling = p.xPos + this.WORLD_UNIT_SIZE;
 
             if (xFalling < 0)
                 xFalling = 0;
@@ -147,6 +146,7 @@ namespace GeometryFriendsAgents.Model
                     res = this.WM.PlatformList.TryGetValue(this.Matrix[pf.xMatrix, j], out plat);
                     if (res)
                     {
+                        ConsolePrinter.PrintLine("Hurray, y is: " + plat.TopPointY);
                         pf.yPos = plat.TopPointY;
                         break;
                     }
@@ -242,7 +242,7 @@ namespace GeometryFriendsAgents.Model
             int leftPosX = origPoint.xMatrix - 1;
             int rigthPosX = origPoint.xMatrix + 1;
 
-            int downPosY = origPoint.yMatrix - 1;
+            int downPosY = origPoint.yMatrix + 1;
             if (leftPosX >= 0)
             {
                 bool result = (!this.CheckPosition(leftPosX, origPoint.yMatrix, this.WM.Matrix.PLAT) && !this.CheckPosition(leftPosX, downPosY, this.WM.Matrix.PLAT));

@@ -63,7 +63,7 @@ namespace GeometryFriendsAgents.Pathfinding
 
             if (childNodeRecord.status == NodeStatus.Closed) return;
 
-            g = bestNode.gValue;
+            g = bestNode.gValue +1;
             h = this.Heuristic.H(childNodeRecord);
             f = F(g,h);
 
