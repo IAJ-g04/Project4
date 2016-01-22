@@ -84,12 +84,8 @@ namespace GeometryFriendsAgents.DecisionMaking
         {
             this.CurrentActionID = -1;
 
-            if (this.CurrentRectangle.heigth < 60)
-                this.setSolution(this.Manual.getSolution(this.WM.Path[this.CurrentConnectionID]));
-            else if (this.CurrentRectangle.heigth < 150)
-                this.setSolution("8" + this.Manual.getSolution(this.WM.Path[this.CurrentConnectionID]));
-            else
-                this.setSolution("88" + this.Manual.getSolution(this.WM.Path[this.CurrentConnectionID]));
+            this.setSolution(this.Manual.getSolution(this.WM.Path[this.CurrentConnectionID]));
+            
         }
 
         public bool isOutPath()
@@ -110,8 +106,8 @@ namespace GeometryFriendsAgents.DecisionMaking
             float yPos = this.CurrentRectangle.yPos;
             Connection cc = this.WM.Path[this.CurrentConnectionID];
 
-            if (Math.Abs(xPos - cc.Destination.xPos) < this.WM.Matrix.WORLD_UNIT_SIZE &&
-                Math.Abs(yPos - cc.Destination.yPos) < this.WM.Matrix.WORLD_UNIT_SIZE)
+            if (Math.Abs(xPos - cc.Destination.xPos) < this.WM.Matrix.WORLD_UNIT_SIZE * 2 &&
+                Math.Abs(yPos - cc.Destination.yPos) < this.WM.Matrix.WORLD_UNIT_SIZE * 2)
                 return true;
 
             return false;
