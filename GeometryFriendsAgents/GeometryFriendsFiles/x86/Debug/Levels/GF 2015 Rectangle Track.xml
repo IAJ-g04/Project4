@@ -4,25 +4,27 @@
     <Description />
     <Tips />
     <BallStartingPosition X="-1000" Y="-1000" />
-    <SquareStartingPosition X="104" Y="136" />
+    <SquareStartingPosition X="504" Y="248" />
     <Collectibles>
-      <Collectible X="1032" Y="232" />
-      <Collectible X="1176" Y="696" />
-      <Collectible X="376" Y="696" />
+      <Collectible X="1064" Y="680" />
     </Collectibles>
     <GreenObstacles />
     <BlackObstacles>
-      <Obstacle width="288" height="32" X="40" Y="216" centered="false" />
-      <Obstacle width="592" height="416" X="488" Y="280" centered="false" />
+      <Obstacle width="160" height="64" X="408" Y="312" centered="false" />
+      <Obstacle width="400" height="48" X="40" Y="264" centered="false" />
+      <Obstacle width="160" height="64" X="648" Y="312" centered="false" />
+      <Obstacle width="464" height="48" X="776" Y="264" centered="false" />
     </BlackObstacles>
     <YellowObstacles />
     <GreenElevators />
     <OrangeElevators />
-    <TimeLimit value="30" />
+    <TimeLimit value="60" />
     <HighScores>
-      <HighScore name="" value="18" />
-      <HighScore name="RandCircle&amp;RandRect" value="30" />
-      <HighScore name="RandCircle&amp;RandRect" value="112" />
+      <HighScore name="RandCircle&amp;LearningRect" value="19" />
+      <HighScore name="RandCircle&amp;RandRect" value="27" />
+      <HighScore name="" value="30" />
+      <HighScore name="RandCircle&amp;RandRect" value="42" />
+      <HighScore name="RandCircle&amp;RandRect" value="46" />
     </HighScores>
   </Level1>
   <Level2>
