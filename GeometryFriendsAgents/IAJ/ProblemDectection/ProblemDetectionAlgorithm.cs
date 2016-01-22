@@ -65,7 +65,7 @@ namespace GeometryFriendsAgents.ProblemDectection
                         {
                             if (this.WM.Matrix.CheckHoleBetween(op, nop))
                             {
-                                if ((op.xPos - nop.xPos) <= 3 * this.WM.Matrix.WORLD_UNIT_SIZE)
+                                if (op.DistanceToInX(nop) <= 3 * this.WM.Matrix.WORLD_UNIT_SIZE)
                                 {
                                     Connection c = new Connection(WM, op, nop);
                                     c.categorie = c.SLIDEONHOLE;
@@ -94,7 +94,7 @@ namespace GeometryFriendsAgents.ProblemDectection
                         {
 
                             Point pf = this.WM.Matrix.GenerateNewPointFalling(op, this.WM.Matrix.DOWN);
-                            if ((op.yPos - pf.yPos) <= 4 * this.WM.Matrix.WORLD_UNIT_SIZE)
+                            if (op.DistanceToInY(pf) <= 4 * this.WM.Matrix.WORLD_UNIT_SIZE)
                             {
                                 Connection c = new Connection(WM, op, pf);
                                 c.categorie = c.FALLING;
@@ -122,7 +122,7 @@ namespace GeometryFriendsAgents.ProblemDectection
                         if (WM.Matrix.CheckDownForStar(op))
                         {
                             Point ps = WM.Matrix.GenerateNewPointFallingStar(op);
-                            if ((op.yPos - pf.yPos) >= 3 * this.WM.Matrix.WORLD_UNIT_SIZE)
+                            if (op.DistanceToInY(pf) >= 3 * this.WM.Matrix.WORLD_UNIT_SIZE)
                             {
                                 ps = OpenPoints.SearchInOpen(ps);
                                 Connection c = new Connection(WM, op, ps);
@@ -144,7 +144,7 @@ namespace GeometryFriendsAgents.ProblemDectection
                         else
                         {
                             //stair or gem TODO
-                            if ((op.yPos - pf.yPos) <= 3 * this.WM.Matrix.WORLD_UNIT_SIZE)
+                            if (op.DistanceToInY(pf) <= 3 * this.WM.Matrix.WORLD_UNIT_SIZE)
                             {
                                 Connection c = new Connection(WM, op, pf);
                                 c.categorie = c.FALLING;

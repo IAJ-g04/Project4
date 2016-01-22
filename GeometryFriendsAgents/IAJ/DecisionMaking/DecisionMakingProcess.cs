@@ -37,6 +37,7 @@ namespace GeometryFriendsAgents.DecisionMaking
             if ((cube.Equals(CurrentRectangle) && this.CurrentConnectionID != -1) || 
                 (((this.CurrentConnectionID != -1) && (this.CurrentActionID >= this.CurrentSolution.Length - 1) && !isOutConn(this.WM.Path[this.CurrentConnectionID]) && !isOnGoal())))
             {
+                ConsolePrinter.PrintLine("Improvise");
                 this.calculateNewAction();
             }
             
@@ -66,6 +67,13 @@ namespace GeometryFriendsAgents.DecisionMaking
             }
 
             this.CurrentActionID++;
+          /*  if ((this.CurrentActionID >= this.CurrentSolution.Length - 1))
+            {
+
+                ConsolePrinter.PrintLine("Improvise a lot");
+                this.calculateNewAction();
+            }*/
+
 
             ConsolePrinter.PrintLine("ActionID: " + this.CurrentActionID);
             ConsolePrinter.PrintLine("Action  : " + this.CurrentSolution[this.CurrentActionID]);
@@ -102,8 +110,8 @@ namespace GeometryFriendsAgents.DecisionMaking
             float yPos = this.CurrentRectangle.yPos;
             Connection cc = this.WM.Path[this.CurrentConnectionID];
 
-            if (Math.Abs(xPos - cc.Destination.xPos) < this.WM.Matrix.WORLD_UNIT_SIZE * 2.5 &&
-                Math.Abs(yPos - cc.Destination.yPos) < this.WM.Matrix.WORLD_UNIT_SIZE * 2.5)
+            if (Math.Abs(xPos - cc.Destination.xPos) < this.WM.Matrix.WORLD_UNIT_SIZE &&
+                Math.Abs(yPos - cc.Destination.yPos) < this.WM.Matrix.WORLD_UNIT_SIZE)
                 return true;
 
             return false;
